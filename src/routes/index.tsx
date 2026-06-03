@@ -1,29 +1,60 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Nav } from "@/components/site/Nav";
+import { Hero } from "@/components/site/Hero";
+import { TrustMarquee } from "@/components/site/TrustMarquee";
+import { LearningGap } from "@/components/site/LearningGap";
+import { Journey } from "@/components/site/Journey";
+import { JupyterLabs } from "@/components/site/JupyterLabs";
+import { AIFeatures } from "@/components/site/AIFeatures";
+import { Impact } from "@/components/site/Impact";
+import { Solutions } from "@/components/site/Solutions";
+import { Careers } from "@/components/site/Careers";
+import { Integrations } from "@/components/site/Integrations";
+import { Security } from "@/components/site/Security";
+import { FAQ } from "@/components/site/FAQ";
+import { CTA } from "@/components/site/CTA";
+import { Footer } from "@/components/site/Footer";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Upskilled.ai — Where Learning Becomes Capability" },
+      {
+        name: "description",
+        content:
+          "AI-powered learning platform with intelligent tutors, integrated Jupyter labs, automated assessments, and career pathways — built to turn learning into measurable outcomes.",
+      },
+      { property: "og:title", content: "Upskilled.ai — Where Learning Becomes Capability" },
+      {
+        property: "og:description",
+        content:
+          "AI tutors, integrated coding labs, automated assessments, career pathways, and learning intelligence.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="relative min-h-screen overflow-x-clip">
+      <Nav />
+      <Hero />
+      <TrustMarquee />
+      <LearningGap />
+      <Journey />
+      <JupyterLabs />
+      <AIFeatures />
+      <Impact />
+      <Solutions />
+      <Careers />
+      <Integrations />
+      <Security />
+      <FAQ />
+      <CTA />
+      <Footer />
+    </main>
   );
 }

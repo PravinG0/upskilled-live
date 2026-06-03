@@ -1,0 +1,56 @@
+import { motion } from "framer-motion";
+import { Users, Building2, ShieldCheck, TrendingUp, GraduationCap, Cpu, Award, FlaskConical } from "lucide-react";
+
+const trainingTypes = [
+  { Icon: Users, title: "Employee Onboarding", body: "Accelerate readiness through structured onboarding journeys and guided learning experiences. 40% faster time-to-productivity." },
+  { Icon: Building2, title: "Corporate Training", body: "Deliver scalable learning programs that support workforce development and employee growth across any size organization." },
+  { Icon: ShieldCheck, title: "Compliance Training", body: "Maintain audit readiness through certifications, assessments, automated reporting, and compliance tracking." },
+  { Icon: TrendingUp, title: "Workforce Upskilling", body: "Develop future-ready teams through practical learning experiences and skill-based development pathways." },
+  { Icon: GraduationCap, title: "Higher Education", body: "Deliver engaging academic learning experiences that combine theory with hands-on coding lab practice." },
+  { Icon: Cpu, title: "Technical Training", body: "Enable learners to develop programming, data science, AI, cloud, and tech skills through integrated coding labs." },
+  { Icon: Award, title: "Certification Programs", body: "Create structured certification pathways with assessments, competency validation, and credential management." },
+  { Icon: FlaskConical, title: "Data Science Labs", body: "Live Jupyter notebooks, in-notebook AI tutor, auto-graded code review — scale to thousands without manual effort." },
+];
+
+export function Solutions() {
+  return (
+    <section className="relative py-28">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="max-w-3xl">
+          <div className="text-xs tracking-[0.25em] text-gold font-mono">BY TRAINING TYPE</div>
+          <h2 className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold">
+            Flexible Solutions Designed for{" "}
+            <span className="text-gold text-glow-gold">Modern Learning Environments.</span>
+          </h2>
+          <p className="mt-5 text-muted-foreground">
+            From employee onboarding to university bootcamps — Upskilled adapts to every training
+            context and learning need.
+          </p>
+        </div>
+        <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {trainingTypes.map((t, i) => {
+            const TI = t.Icon;
+            return (
+              <motion.div
+                key={t.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6, delay: (i % 4) * 0.06 }}
+                whileHover={{ y: -4 }}
+                className="group relative rounded-2xl glass p-6 overflow-hidden"
+              >
+                <div className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent opacity-0 group-hover:opacity-100 transition" />
+                <div className="grid place-items-center size-11 rounded-xl glass-gold text-gold">
+                  <TI className="size-5" />
+                </div>
+                <h3 className="mt-5 font-display text-lg font-semibold">{t.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{t.body}</p>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}

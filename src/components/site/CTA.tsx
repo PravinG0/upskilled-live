@@ -15,23 +15,22 @@ export function CTA() {
           <div className="absolute inset-0 grid-bg opacity-30" />
           <div className="absolute -top-20 left-1/2 -translate-x-1/2 size-[28rem] rounded-full bg-gold/20 blur-3xl" />
           <div className="relative">
-            <div className="text-xs tracking-[0.25em] text-gold font-mono">GET STARTED TODAY</div>
+            <div className="text-xs tracking-[0.25em] text-gold font-mono">THE COST OF WAITING</div>
             <h2 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05]">
-              Ready to Transform Learning Into <br />
-              <span className="text-gold text-glow-gold">Measurable Outcomes?</span>
+              Build skills. Prove growth. <br />
+              <span className="text-gold text-glow-gold">Or watch someone else do it faster.</span>
             </h2>
             <p className="mt-6 max-w-2xl mx-auto text-muted-foreground">
-              Whether you are training employees, educating students, or developing future talent,
-              Upskilled provides the tools to create engaging learning experiences, validate
-              skills, and deliver measurable success.
+              Every day your organization runs on a platform that can't prove capability is a day
+              the gap between you and the competition quietly grows. Upskilled turns learning into
+              something your organization can measure, defend, and build on.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <a
                 href="#"
                 className="group relative inline-flex items-center gap-2 rounded-full bg-gold text-black font-semibold px-6 py-3 text-sm hover:scale-[1.03] active:scale-95 transition glow-gold overflow-hidden"
               >
-                <span className="relative z-10">Book a Personalized Demo</span>
-                <ArrowRight className="size-4 relative z-10 group-hover:translate-x-1 transition" />
+                <span className="relative z-10">Start Free Trial →</span>
                 <span className="absolute inset-0 shine" />
               </a>
               <a
@@ -39,7 +38,7 @@ export function CTA() {
                 className="inline-flex items-center gap-2 rounded-full glass px-6 py-3 text-sm hover:bg-white/5 transition"
               >
                 <MessageCircle className="size-4 text-gold" />
-                Talk to a Learning Specialist
+                Book a Demo
               </a>
             </div>
           </div>

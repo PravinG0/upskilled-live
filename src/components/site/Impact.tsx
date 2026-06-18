@@ -32,10 +32,13 @@ const outcomes = [
 
 const metrics = [
   { val: <><Counter to={80} />%</>, k: "Grading Time Reduced", body: "From 60% of instructor time on grading to under 10%" },
-  { val: <><Counter to={40} />%</>, k: "Faster Onboarding", body: "New hires reach productivity faster with AI-guided onboarding" },
+  { val: <><Counter to={40} />%</>, k: "Faster Onboarding", body: "New hires reach productivity faster with AI-guided onboarding paths" },
   { val: <><Counter to={3} />×</>, k: "Faster Time-to-Skill", body: "Hands-on labs drive 3× faster skill acquisition than video-only learning" },
   { val: <><Counter to={5} /> min</>, k: "Doubt Resolution", body: "Down from 8 hours — AI answers learner questions in under 5 minutes" },
-  { val: <>&lt;$<Counter to={5} /></>, k: "Per Learner Per Month", body: "Open-source base + predictable cloud pricing. Compare to $15–$60 on Coursera or LinkedIn Learning." },
+  { val: <><Counter to={10} />×</>, k: "Faster Course Creation", body: "AI Content Assistant — what takes weeks now takes a morning" },
+  { val: <><Counter to={97} />%</>, k: "Higher Job Confidence", body: "Learners who report stronger job readiness after completing labs" },
+  { val: <><Counter to={12} /> wks</>, k: "Early Dropout Detection", body: "AI flags disengagement risk up to 12 weeks before dropout happens" },
+  { val: <>$<Counter to={43.5} decimals={1} />B</>, k: "LMS Market — 2026", body: "Your competitors are investing in better learning infrastructure right now" },
 ];
 
 export function Impact() {
@@ -43,9 +46,10 @@ export function Impact() {
     <section id="impact" className="relative py-28">
       <div className="mx-auto max-w-7xl px-4">
         <div className="max-w-3xl">
-          <div className="text-xs tracking-[0.25em] text-gold font-mono">MEASURABLE IMPACT</div>
+          <div className="text-xs tracking-[0.25em] text-gold font-mono">THE NUMBERS THAT MATTER</div>
           <h2 className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold">
-            Measure <span className="text-gold text-glow-gold">What Matters.</span>
+            Measured Outcomes.{" "}
+            <span className="text-gold text-glow-gold">Not Measured Completions.</span>
           </h2>
           <p className="mt-5 text-muted-foreground">
             Learning initiatives should deliver more than course completions. They should improve
@@ -72,7 +76,7 @@ export function Impact() {
           ))}
         </div>
 
-        <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {metrics.map((m, i) => (
             <motion.div
               key={m.k}

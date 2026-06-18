@@ -4,44 +4,44 @@ import { Bot, FileQuestion, CheckCheck, MessageSquare, Sparkles, LineChart } fro
 
 const features = [
   {
-    tag: "Learners",
+    tag: "Learner Support",
     title: "AI Tutor",
-    body: "Provide instant support, contextual guidance, and personalized assistance whenever learners need help — embedded directly in lessons and Jupyter notebooks.",
+    body: "Context-aware, embedded in every lesson and notebook. Available 24/7. Provides personalized explanations, code guidance, and step-by-step help — exactly when the learner needs it, not 8 hours later on a forum.",
     Icon: Bot,
     demo: "tutor",
   },
   {
     tag: "Assessment",
     title: "AI Quiz Generator",
-    body: "Automatically create quizzes and assessments aligned with learning objectives, saving hours of content creation time per course.",
+    body: "Generates high-quality, objective-aligned assessments automatically. Saves instructors 40+ hours of quiz creation per course. Every learner gets tested on what actually matters.",
     Icon: FileQuestion,
     demo: "quiz",
   },
   {
-    tag: "Instructors",
-    title: "AI Auto Grading",
-    body: "Reduce instructor workload by up to 80% by automating assignment evaluation and delivering consistent, timely feedback to every learner.",
+    tag: "Grading",
+    title: "AI Auto-Grading",
+    body: "Reduces instructor grading effort by 80%. AI drafts grades and feedback from rubrics — instructors review instead of create. Feedback cycles drop from days to minutes.",
     Icon: CheckCheck,
     demo: "grade",
   },
   {
-    tag: "Support",
+    tag: "Instant Help",
     title: "AI Doubt Solver",
-    body: "Help learners get unblocked faster. AI drafts contextual answers to forum questions in seconds — turning 8-hour wait times into 5 minutes.",
+    body: "Responds to learner questions in under 5 minutes — vs. the 8-hour industry average. Complex queries are escalated to instructors. Common ones are resolved instantly.",
     Icon: MessageSquare,
     demo: "doubt",
   },
   {
-    tag: "Content",
+    tag: "Content Creation",
     title: "AI Content Assistant",
-    body: "Accelerate course development with AI-generated outlines, lesson recommendations, quiz banks, and Jupyter notebook starters.",
+    body: "Generate full course outlines, quiz banks, notebook starters, and lesson summaries from a topic or learning objective. What takes weeks now takes a morning.",
     Icon: Sparkles,
     demo: "content",
   },
   {
     tag: "Analytics",
-    title: "AI Learning Insights",
-    body: "Identify skill gaps, engagement patterns, and learning opportunities through intelligent analytics that surface what matters most.",
+    title: "AI Learning Intelligence",
+    body: "Identifies skill gaps, dropout risks, engagement patterns, and program effectiveness across your entire learner population. Turns learning data into decisions L&D leaders can act on — and defend in budget reviews.",
     Icon: LineChart,
     demo: "insights",
   },
@@ -135,11 +135,14 @@ export function AIFeatures() {
         <div className="max-w-3xl">
           <div className="text-xs tracking-[0.25em] text-gold font-mono">AI-POWERED TOOLS</div>
           <h2 className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold">
-            Enhance Learning with <span className="text-gold text-glow-gold">Intelligent AI Capabilities.</span>
+            Six AI Capabilities. All Native.{" "}
+            <span className="text-gold text-glow-gold">All Included.</span>
           </h2>
           <p className="mt-5 text-muted-foreground">
-            Leverage artificial intelligence to create engaging learning experiences, reduce
-            administrative effort, and improve outcomes across every course.
+            Every learner gets a personal AI. Every instructor gets their time back.
+            Context-aware, embedded in every lesson and notebook. Available 24/7. These aren't
+            add-ons or premium tiers — they're built into the core of how Upskilled works.
+            Every learner. Every lesson. Every time.
           </p>
         </div>
 

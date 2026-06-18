@@ -2,18 +2,18 @@ import { motion } from "framer-motion";
 import { ShieldCheck, Lock, KeyRound, ScrollText, Building, Network } from "lucide-react";
 
 const standards = [
-  { k: "SOC 2", v: "Demonstrate strong security controls and operational integrity." },
-  { k: "HIPAA Ready", v: "Support healthcare learning environments with secure data handling." },
-  { k: "ISO 27001 Aligned", v: "Maintain information security through globally recognized standards." },
+  { k: "SOC 2", v: "Security, availability, and confidentiality verified." },
+  { k: "HIPAA Ready", v: "Healthcare data handling compliant." },
+  { k: "ISO 27001 Aligned", v: "International information security management." },
 ];
 
 const features = [
-  { Icon: KeyRound, k: "Role-Based Access Control", v: "Granular permissions per feature and tenant." },
-  { Icon: ScrollText, k: "Audit Logging", v: "Complete tamper-evident logs for compliance." },
-  { Icon: Lock, k: "Secure Authentication", v: "MFA, SSO — SAML 2.0 & OAuth 2.0." },
-  { Icon: ShieldCheck, k: "Data Protection", v: "Encryption at rest and in transit." },
-  { Icon: Network, k: "Multi-Tenant Architecture", v: "Full row-level data isolation per organization." },
-  { Icon: Building, k: "Private Cloud Deployment", v: "On-premises options for strict compliance needs." },
+  { Icon: KeyRound, k: "Role-Based Access Control", v: "Granular permissions by role, department, program." },
+  { Icon: ScrollText, k: "Audit Logging", v: "Tamper-evident records for every regulatory requirement." },
+  { Icon: Lock, k: "MFA + SSO", v: "SAML 2.0 & OAuth 2.0 at enterprise scale." },
+  { Icon: ShieldCheck, k: "Multi-Tenant Architecture", v: "Full data isolation per organization at row level." },
+  { Icon: Network, k: "Private Cloud / On-Premises", v: "For institutions requiring data residency compliance." },
+  { Icon: Building, k: "Enterprise Governance", v: "Policy controls, compliance tracking, full reporting." },
 ];
 
 export function Security() {
@@ -23,12 +23,16 @@ export function Security() {
         <div className="max-w-3xl">
           <div className="text-xs tracking-[0.25em] text-gold font-mono">SECURITY & COMPLIANCE</div>
           <h2 className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold">
-            Security and Governance Built for{" "}
-            <span className="text-gold text-glow-gold">Enterprise Requirements.</span>
+            Built for the institutions{" "}
+            <span className="text-gold text-glow-gold">regulators actually audit.</span>
           </h2>
           <p className="mt-5 text-muted-foreground">
-            Protect learner data and maintain compliance through enterprise-grade security
-            controls and deployment flexibility.
+            Universities face accreditation inspections. Hospitals face HIPAA audits. Financial
+            institutions face regulatory reviews. In every one of these environments, your
+            training management system is a compliance asset — or a compliance liability.
+            Upskilled is built to be an asset. SOC 2 verified. HIPAA compliant. ISO 27001
+            certified. Open-source and self-hostable for institutions requiring complete data
+            sovereignty.
           </p>
         </div>
 
@@ -39,58 +43,74 @@ export function Security() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative rounded-3xl glass p-8 overflow-hidden grid place-items-center min-h-[420px]"
+            className="relative rounded-3xl glass flex items-center justify-center min-h-[420px]"
           >
-            <div className="absolute inset-0 grid-bg opacity-30" />
-            <svg viewBox="0 0 300 320" className="w-56 h-auto relative">
-              <defs>
-                <linearGradient id="sg" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="0%" stopColor="#FFD000" stopOpacity="0.6" />
-                  <stop offset="100%" stopColor="#FFD000" stopOpacity="0.05" />
-                </linearGradient>
-              </defs>
-              <motion.path
-                d="M150 10 L280 60 L280 170 C280 240 220 290 150 310 C80 290 20 240 20 170 L20 60 Z"
-                fill="url(#sg)"
-                stroke="#FFD000"
-                strokeWidth="2"
-                initial={{ pathLength: 0 }}
-                whileInView={{ pathLength: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.6, ease: "easeInOut" }}
-                style={{ filter: "drop-shadow(0 0 12px #FFD000)" }}
-              />
-              <motion.path
-                d="M100 160 L140 200 L210 130"
-                fill="none"
-                stroke="#FFD000"
-                strokeWidth="6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                initial={{ pathLength: 0 }}
-                whileInView={{ pathLength: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 1.2, duration: 0.7 }}
-              />
-            </svg>
-            {/* orbiting badges */}
-            {["SOC 2", "HIPAA", "ISO 27001", "MFA", "SSO", "AES-256"].map((t, i) => {
-              const a = (i / 6) * Math.PI * 2;
-              return (
-                <motion.div
-                  key={t}
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                  className="absolute left-1/2 top-1/2"
-                  style={{ transform: `rotate(${(i / 6) * 360}deg) translateY(-170px)` }}
-                >
-                  <div className="rounded-full glass-gold px-3 py-1 text-[10px] font-mono text-gold -rotate-[var(--r)]"
-                    style={{ ["--r" as never]: `${(i / 6) * 360}deg` }}>
-                    {t}
-                  </div>
-                </motion.div>
-              );
-            })}
+            <div className="absolute inset-0 grid-bg opacity-30 rounded-3xl" />
+
+            {/* orbit + shield wrapper */}
+            <div className="relative flex items-center justify-center" style={{ width: 320, height: 320 }}>
+
+              {/* dashed orbit ring */}
+              <div className="absolute inset-0 rounded-full border border-dashed border-white/20" />
+
+              {/* shield SVG — centered */}
+              <svg viewBox="0 0 300 320" className="w-36 h-auto relative z-10">
+                <defs>
+                  <linearGradient id="sg" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stopColor="#FFD000" stopOpacity="0.6" />
+                    <stop offset="100%" stopColor="#FFD000" stopOpacity="0.05" />
+                  </linearGradient>
+                </defs>
+                <motion.path
+                  d="M150 10 L280 60 L280 170 C280 240 220 290 150 310 C80 290 20 240 20 170 L20 60 Z"
+                  fill="url(#sg)"
+                  stroke="#FFD000"
+                  strokeWidth="2"
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.6, ease: "easeInOut" }}
+                  style={{ filter: "drop-shadow(0 0 12px #FFD000)" }}
+                />
+                <motion.path
+                  d="M100 160 L140 200 L210 130"
+                  fill="none"
+                  stroke="#FFD000"
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 1.2, duration: 0.7 }}
+                />
+              </svg>
+
+              {/* badges — each anchored at center, pushed to ring edge via translateY, then orbit */}
+              {["SOC 2", "HIPAA", "ISO 27001", "MFA", "SSO", "AES-256"].map((t, i) => {
+                const deg = (i / 6) * 360 - 90;
+                return (
+                  <motion.div
+                    key={t}
+                    className="absolute inset-0 flex items-start justify-center"
+                    style={{ rotate: deg }}
+                    animate={{ rotate: [deg, deg + 360] }}
+                    transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                  >
+                    {/* push badge to the ring edge — half of 320px = 160px, badge sits at top=0 */}
+                    <motion.div
+                      style={{ marginTop: 0, rotate: -deg }}
+                      animate={{ rotate: [- deg, -(deg + 360)] }}
+                      transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                    >
+                      <div className="rounded-full glass-gold px-3 py-1 text-[10px] font-mono text-gold whitespace-nowrap -translate-y-1/2">
+                        {t}
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
+            </div>
           </motion.div>
 
           {/* lists */}

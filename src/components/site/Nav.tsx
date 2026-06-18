@@ -5,9 +5,8 @@ import { Menu, X } from "lucide-react";
 
 const links = [
   { href: "#platform", label: "Platform" },
-  { href: "#features", label: "AI Features" },
-  { href: "#impact", label: "Outcomes" },
-  { href: "#careers", label: "Careers" },
+  { href: "#features", label: "AI Tools" },
+  { href: "#careers", label: "Jobs Portal" },
   { href: "#security", label: "Security" },
   { href: "#faq", label: "FAQ" },
 ];
@@ -50,13 +49,13 @@ export function Nav() {
           </nav>
           <div className="hidden md:flex items-center gap-2">
             <a href="#cta" className="text-sm text-muted-foreground hover:text-foreground px-3 py-2">
-              Sign in
+              Sign In
             </a>
             <a
               href="#cta"
               className="text-sm font-medium bg-gold text-black px-4 py-2 rounded-full hover:scale-[1.03] active:scale-95 transition-transform shadow-[0_8px_24px_-8px_var(--gold)]"
             >
-              Start Free Trial
+              Book a Demo
             </a>
           </div>
           <button

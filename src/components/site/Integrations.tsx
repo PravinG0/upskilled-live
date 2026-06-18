@@ -12,6 +12,10 @@ const tech = [
   "REST API", "Tableau & Power BI",
 ];
 
+// Shorter labels for the orbit rings to avoid overlap
+const innerLabels = ["Zoom", "Slack", "Salesforce", "Workday", "Webhooks", "Zapier"];
+const outerLabels = ["LTI 1.3", "REST API", "Microsoft Teams", "Google Workspace", "SAP SuccessFactors", "SCORM / xAPI", "SSO / SAML", "Tableau & BI"];
+
 export function Integrations() {
   return (
     <section className="relative py-28">
@@ -46,50 +50,88 @@ export function Integrations() {
           </div>
 
           {/* ecosystem orbit */}
-          <div className="relative h-[440px] rounded-3xl glass overflow-hidden">
+          <div className="relative rounded-3xl glass overflow-hidden flex items-center justify-center py-16">
             <div className="absolute inset-0 grid-bg opacity-30" />
-            {/* center hub */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-24 rounded-2xl glass-gold grid place-items-center text-center glow-gold">
-              <div>
-                <div className="text-[10px] font-mono text-gold">CORE</div>
-                <div className="font-display font-bold">Upskilled</div>
+
+            {/* orbits wrapper */}
+            <div className="relative flex items-center justify-center" style={{ width: 360, height: 360 }}>
+
+              {/* dashed orbit rings */}
+              {[130, 200].map((r) => (
+                <div
+                  key={r}
+                  className="absolute rounded-full border border-dashed border-white/10"
+                  style={{ width: r * 2, height: r * 2 }}
+                />
+              ))}
+
+              {/* center hub */}
+              <div className="relative z-10 size-24 rounded-2xl glass-gold grid place-items-center text-center glow-gold">
+                <div>
+                  <div className="text-[10px] font-mono text-gold">CORE</div>
+                  <div className="font-display font-bold">Upskilled</div>
+                </div>
               </div>
-            </div>
-            {/* orbits */}
-            {[
-              { r: 110, n: 6, dur: 28 },
-              { r: 170, n: 8, dur: 40, reverse: true },
-            ].map((o, oi) => (
+
+              {/* inner ring — r=130, 6 labels, slow */}
               <motion.div
-                key={oi}
-                animate={{ rotate: o.reverse ? -360 : 360 }}
-                transition={{ duration: o.dur, repeat: Infinity, ease: "linear" }}
-                className="absolute left-1/2 top-1/2"
-                style={{ width: o.r * 2, height: o.r * 2, transform: `translate(-50%,-50%)` }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+                className="absolute"
+                style={{ width: 260, height: 260 }}
               >
-                <div className="relative w-full h-full rounded-full border border-dashed border-white/10">
-                  {Array.from({ length: o.n }).map((_, i) => {
-                    const a = (i / o.n) * Math.PI * 2;
-                    const x = o.r + Math.cos(a) * o.r;
-                    const y = o.r + Math.sin(a) * o.r;
-                    const label = tech[(oi * 6 + i) % tech.length];
-                    return (
+                {innerLabels.map((label, i) => {
+                  const deg = (i / innerLabels.length) * 360;
+                  return (
+                    <motion.div
+                      key={label}
+                      className="absolute inset-0 flex items-start justify-center"
+                      style={{ rotate: deg }}
+                    >
                       <motion.div
-                        key={i}
-                        animate={{ rotate: o.reverse ? 360 : -360 }}
-                        transition={{ duration: o.dur, repeat: Infinity, ease: "linear" }}
-                        className="absolute"
-                        style={{ left: x, top: y, transform: "translate(-50%,-50%)" }}
+                        animate={{ rotate: [-(deg), -(deg + 360)] }}
+                        transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+                        className="-translate-y-1/2"
                       >
-                        <div className="whitespace-nowrap rounded-full glass px-3 py-1 text-[11px] font-medium hover:glass-gold hover:text-gold transition">
+                        <div className="whitespace-nowrap rounded-full glass px-2.5 py-0.5 text-[10px] font-medium text-foreground/80 hover:glass-gold hover:text-gold transition">
                           {label}
                         </div>
                       </motion.div>
-                    );
-                  })}
-                </div>
+                    </motion.div>
+                  );
+                })}
               </motion.div>
-            ))}
+
+              {/* outer ring — r=200, 8 labels, slower & reverse */}
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ duration: 44, repeat: Infinity, ease: "linear" }}
+                className="absolute"
+                style={{ width: 400, height: 400 }}
+              >
+                {outerLabels.map((label, i) => {
+                  const deg = (i / outerLabels.length) * 360;
+                  return (
+                    <motion.div
+                      key={label}
+                      className="absolute inset-0 flex items-start justify-center"
+                      style={{ rotate: deg }}
+                    >
+                      <motion.div
+                        animate={{ rotate: [-(deg), -(deg - 360)] }}
+                        transition={{ duration: 44, repeat: Infinity, ease: "linear" }}
+                        className="-translate-y-1/2"
+                      >
+                        <div className="whitespace-nowrap rounded-full glass px-2.5 py-0.5 text-[10px] font-medium text-foreground/80 hover:glass-gold hover:text-gold transition">
+                          {label}
+                        </div>
+                      </motion.div>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+
+            </div>
           </div>
         </div>
 

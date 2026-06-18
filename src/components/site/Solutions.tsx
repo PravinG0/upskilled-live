@@ -2,14 +2,14 @@ import { motion } from "framer-motion";
 import { Users, Building2, ShieldCheck, TrendingUp, GraduationCap, Cpu, Award, FlaskConical } from "lucide-react";
 
 const trainingTypes = [
-  { Icon: Users, title: "Employee Onboarding", body: "Accelerate readiness through structured onboarding journeys and guided learning experiences. 40% faster time-to-productivity." },
+  { Icon: Users, title: "Employee Onboarding", body: "Accelerate readiness through structured onboarding journeys. 40% faster time-to-productivity — every new hire, every time, at any scale." },
   { Icon: Building2, title: "Corporate Training", body: "Deliver scalable learning programs that support workforce development and employee growth across any size organization." },
-  { Icon: ShieldCheck, title: "Compliance Training", body: "Maintain audit readiness through certifications, assessments, automated reporting, and compliance tracking." },
-  { Icon: TrendingUp, title: "Workforce Upskilling", body: "Develop future-ready teams through practical learning experiences and skill-based development pathways." },
-  { Icon: GraduationCap, title: "Higher Education", body: "Deliver engaging academic learning experiences that combine theory with hands-on coding lab practice." },
-  { Icon: Cpu, title: "Technical Training", body: "Enable learners to develop programming, data science, AI, cloud, and tech skills through integrated coding labs." },
-  { Icon: Award, title: "Certification Programs", body: "Create structured certification pathways with assessments, competency validation, and credential management." },
-  { Icon: FlaskConical, title: "Data Science Labs", body: "Live Jupyter notebooks, in-notebook AI tutor, auto-graded code review — scale to thousands without manual effort." },
+  { Icon: ShieldCheck, title: "Compliance Training", body: "Maintain audit readiness through certifications, assessments, automated reporting, and compliance tracking. One missed gap can cost more than your entire L&D budget." },
+  { Icon: TrendingUp, title: "Workforce Upskilling", body: "Develop future-ready teams through practical learning experiences and skill-based development pathways. The teams that don't upskill are the ones that get left behind." },
+  { Icon: GraduationCap, title: "Higher Education", body: "Deliver engaging academic learning experiences that combine theory with hands-on coding lab practice. Graduates who can't perform reflect on the institution that trained them." },
+  { Icon: Cpu, title: "Technical Training", body: "Enable learners to develop programming, data science, AI, cloud, and tech skills through integrated coding labs. Not video. Not theory. Practice." },
+  { Icon: Award, title: "Certification Programs", body: "Create structured certification pathways with assessments, competency validation, and credential management that employers actually recognize." },
+  { Icon: FlaskConical, title: "Data Science Labs", body: "Live Jupyter notebooks, in-notebook AI tutor, auto-graded code review — scale to thousands without scaling your manual effort." },
 ];
 
 export function Solutions() {
@@ -17,14 +17,13 @@ export function Solutions() {
     <section className="relative py-28">
       <div className="mx-auto max-w-7xl px-4">
         <div className="max-w-3xl">
-          <div className="text-xs tracking-[0.25em] text-gold font-mono">BY TRAINING TYPE</div>
+          <div className="text-xs tracking-[0.25em] text-gold font-mono">SOLUTIONS</div>
           <h2 className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold">
-            Flexible Solutions Designed for{" "}
-            <span className="text-gold text-glow-gold">Modern Learning Environments.</span>
+            Built for every organization that{" "}
+            <span className="text-gold text-glow-gold">can't afford to fall behind.</span>
           </h2>
           <p className="mt-5 text-muted-foreground">
-            From employee onboarding to university bootcamps — Upskilled adapts to every training
-            context and learning need.
+            50 learners or 50,000 — Upskilled scales to every organization.
           </p>
         </div>
         <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">

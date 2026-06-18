@@ -231,9 +231,11 @@ export function Hero() {
               transition={{ delay: 0.9, duration: 0.6 }}
               className="mt-6 max-w-xl text-base sm:text-lg text-muted-foreground"
             >
-              Upskilled combines AI tutors, integrated coding labs, automated assessments, career
-              pathways, and learning intelligence to build real-world skills — and prove
-              real-world outcomes.
+              Upskilled is AI-powered learning management software that combines AI tutors,
+              integrated coding labs, automated assessments, career pathways, and learning
+              intelligence to build real-world skills — and prove real-world outcomes.
+              As a modern learning management system, Upskilled helps institutions and
+              organizations move beyond static training content and build measurable capability.
             </motion.p>
 
             <motion.div

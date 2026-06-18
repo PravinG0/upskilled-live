@@ -4,8 +4,8 @@ const items = [
   "AI-Powered Learning",
   "Integrated Jupyter Labs",
   "Automated Assessments",
-  "Career Development",
-  "Measurable Outcomes",
+  "Career Pathways",
+  "Learning Intelligence",
   "SOC 2 · HIPAA · ISO 27001",
 ];
 

@@ -5,31 +5,23 @@ import { Plus } from "lucide-react";
 const faqs = [
   {
     q: "What is Upskilled?",
-    a: "Upskilled is an AI-powered learning platform that combines learning management, integrated Jupyter labs, automated assessments, career development tools, and learning analytics to support workforce development and education. It is built on open-source Frappe Framework and is available via self-hosted, managed cloud, or private cloud deployment.",
+    a: "Upskilled is an enterprise learning platform that helps teams learn at the speed of AI without sacrificing rigor. It pairs hands-on courses with a live AI tutor, instructor-reviewed discussions, and AI-drafted grading, so learners can get help when they are stuck while instructors stay in control of what reaches the learner. The platform supports courses, live cohorts, certified learning paths, and structured team deployment.",
   },
   {
     q: "How is Upskilled different from traditional LMS platforms?",
-    a: "Unlike traditional LMS platforms that primarily focus on content delivery, Upskilled enables learners to practice skills through integrated Jupyter labs, receive AI-powered guidance in real time, and demonstrate competency through practical learning experiences. Instructors save up to 80% of their grading time through AI auto-grading.",
+    a: "Upskilled goes beyond basic course delivery by adding an instructor-controlled AI layer to the learning experience. Learners can ask questions inside lessons and receive cited answers grounded in course material, while instructors can review AI-supported discussions and grading before outputs reach students. This gives organizations faster learner support, stronger oversight, and a more auditable learning process than a content-only LMS.",
   },
   {
     q: "Does Upskilled support hands-on technical learning?",
-    a: "Yes. Upskilled includes integrated Jupyter-powered coding labs that allow learners to write code, execute programs, analyze data, and complete practical exercises directly within the platform. An AI tutor is embedded in every notebook to provide hints, explain errors, and guide learners without them needing to leave the lesson.",
+    a: "Yes. Upskilled is built around hands-on courses and includes AI, machine learning, data science, probability, statistics, deep learning, and Frappe Learning course examples on the public platform. Learners can study through structured courses, join scheduled live cohorts, and follow certified learning paths that guide them from learning to completion.",
   },
   {
     q: "Can organizations post job opportunities on Upskilled?",
-    a: "Yes. Upskilled includes a built-in Jobs module where organizations, colleges, universities, and training providers can publish job opportunities. Learners can discover relevant openings aligned with their skills, certifications, and learning progress — creating a complete learning-to-career pathway.",
+    a: "Yes. The platform includes a Jobs Portal, allowing career opportunities to be surfaced inside the Upskilled ecosystem. This supports the connection between learning, skills development, and employment outcomes — matching learners to roles based on demonstrated competency, not just course completion.",
   },
   {
     q: "Can educational institutions use Upskilled?",
-    a: "Yes. Colleges, universities, bootcamps, and training providers can use Upskilled to deliver academic learning, technical training, certification programs, and blended learning experiences. The integrated Jupyter labs are especially well-suited for STEM and computer science programs.",
-  },
-  {
-    q: "What deployment options are available?",
-    a: "Organizations can choose from three deployment models: Cloud (managed on Frappe Cloud), Private Cloud (fully managed in your own environment), or Self-Hosted (free Community Edition on your own infrastructure). Enterprise customers can also deploy on-premises for strict data residency and compliance requirements.",
-  },
-  {
-    q: "Is Upskilled secure?",
-    a: "Yes. Upskilled supports enterprise-grade security controls and compliance standards including SOC 2, HIPAA, and ISO 27001 alignment. Security features include role-based access control, audit logging, MFA, SSO, data encryption, multi-tenant architecture, and private cloud deployment options.",
+    a: "Yes. Educational institutions can use Upskilled to deliver courses, run live cohorts, organize learning paths, and issue certificates on completion. The platform supports scheduled batches where learners study alongside peers, instructors host live classes, and questions can be answered in-thread. This makes it suitable for colleges, universities, bootcamps, and training providers that need structured, mentor-supported learning.",
   },
 ];
 
@@ -39,7 +31,7 @@ export function FAQ() {
     <section id="faq" className="relative py-28">
       <div className="mx-auto max-w-5xl px-4">
         <div className="text-center">
-          <div className="text-xs tracking-[0.25em] text-gold font-mono">FREQUENTLY ASKED QUESTIONS</div>
+          <div className="text-xs tracking-[0.25em] text-gold font-mono">FAQ</div>
           <h2 className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold">
             Have questions? <span className="text-gold text-glow-gold">We have answers.</span>
           </h2>
@@ -51,7 +43,7 @@ export function FAQ() {
             href="#cta"
             className="mt-6 inline-flex items-center gap-2 rounded-full glass-gold text-gold px-5 py-2.5 text-sm hover:scale-[1.03] transition"
           >
-            Book a 20-min Demo
+            Book a 20-min Demo →
           </a>
         </div>
 

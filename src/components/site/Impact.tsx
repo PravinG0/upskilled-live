@@ -23,13 +23,6 @@ function Counter({ to, suffix = "", prefix = "", decimals = 0 }: { to: number; s
   );
 }
 
-const outcomes = [
-  { title: "Track Skill Development", body: "Understand how learners progress from foundational knowledge to practical competency." },
-  { title: "Monitor Workforce Readiness", body: "Measure preparedness across teams, departments, classrooms, and learning programs." },
-  { title: "Improve Learning Effectiveness", body: "Identify which learning experiences deliver the strongest outcomes — and optimize spend." },
-  { title: "Support Compliance Readiness", body: "Track certifications, completions, and regulatory requirements with audit-ready logs." },
-];
-
 const metrics = [
   { val: <><Counter to={80} />%</>, k: "Grading Time Reduced", body: "From 60% of instructor time on grading to under 10%" },
   { val: <><Counter to={40} />%</>, k: "Faster Onboarding", body: "New hires reach productivity faster with AI-guided onboarding paths" },
@@ -55,25 +48,6 @@ export function Impact() {
             Learning initiatives should deliver more than course completions. They should improve
             capability, readiness, performance, and growth.
           </p>
-        </div>
-
-        <div className="mt-14 grid md:grid-cols-2 gap-4">
-          {outcomes.map((o, i) => (
-            <motion.div
-              key={o.title}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, delay: i * 0.06 }}
-              className="rounded-2xl glass p-6 hover:bg-white/[0.04] transition"
-            >
-              <div className="flex items-baseline gap-3">
-                <span className="font-mono text-xs text-gold">0{i + 1}</span>
-                <h3 className="font-display text-xl font-semibold">{o.title}</h3>
-              </div>
-              <p className="mt-3 text-muted-foreground text-sm">{o.body}</p>
-            </motion.div>
-          ))}
         </div>
 
         <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">

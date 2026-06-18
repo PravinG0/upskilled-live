@@ -1,6 +1,171 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { BookOpen, Code2, Wrench, Trophy, CheckCircle2, Circle, Play, TerminalSquare } from "lucide-react";
+import { BookOpen, Code2, Wrench, Trophy } from "lucide-react";
+
+/* ─── Ambient visual fills ─── */
+
+// 01 Learn — animated neural network
+function LearnVisual() {
+  const nodes = [
+    { x: 80, y: 60 }, { x: 80, y: 130 }, { x: 80, y: 200 },
+    { x: 200, y: 40 }, { x: 200, y: 110 }, { x: 200, y: 180 }, { x: 200, y: 250 },
+    { x: 320, y: 80 }, { x: 320, y: 160 }, { x: 320, y: 240 },
+    { x: 420, y: 120 }, { x: 420, y: 200 },
+  ];
+  const edges: [number, number][] = [
+    [0,3],[0,4],[1,3],[1,4],[1,5],[2,4],[2,5],[2,6],
+    [3,7],[3,8],[4,7],[4,8],[4,9],[5,8],[5,9],[6,9],
+    [7,10],[7,11],[8,10],[8,11],[9,11],
+  ];
+  return (
+    <div className="w-full overflow-hidden rounded-xl" style={{ height: 280 }}>
+      <svg viewBox="0 0 500 290" className="w-full h-full" aria-hidden>
+        {edges.map(([a, b], k) => (
+          <motion.line
+            key={k}
+            x1={nodes[a].x} y1={nodes[a].y} x2={nodes[b].x} y2={nodes[b].y}
+            stroke="rgba(255,208,0,0.18)" strokeWidth={1}
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 1.2, delay: k * 0.04, ease: "easeOut" }}
+          />
+        ))}
+        {edges.slice(0, 10).map(([a, b], k) => (
+          <motion.circle key={`p${k}`} r={2.5} fill="#FFD000"
+            animate={{ cx: [nodes[a].x, nodes[b].x], cy: [nodes[a].y, nodes[b].y], opacity: [0, 1, 0] }}
+            transition={{ duration: 1.8 + (k % 3) * 0.4, repeat: Infinity, delay: k * 0.3, ease: "easeInOut" }}
+          />
+        ))}
+        {nodes.map((n, i) => (
+          <g key={i}>
+            <circle cx={n.x} cy={n.y} r={18} fill="rgba(255,208,0,0.06)" />
+            <motion.circle cx={n.x} cy={n.y} r={5} fill="#FFD000"
+              initial={{ scale: 0 }} animate={{ scale: 1 }}
+              transition={{ delay: 0.5 + i * 0.06, type: "spring", stiffness: 200 }}
+            />
+            <motion.circle cx={n.x} cy={n.y} r={5} fill="none" stroke="#FFD000" strokeOpacity={0.5}
+              animate={{ r: [5, 18], opacity: [0.5, 0] }}
+              transition={{ duration: 2.2, repeat: Infinity, delay: i * 0.2 }}
+            />
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
+
+// 02 Practice — floating code tokens
+const CODE_TOKENS = [
+  "import", "pandas", "numpy", "fit()", "predict()", "def train():",
+  "accuracy", "0.947", "X_train", "y_test", "model.score", "epoch=10",
+  "loss: 0.08", "sklearn", "DataFrame", "corr()", "plt.show()",
+];
+function PracticeVisual() {
+  return (
+    <div className="relative w-full overflow-hidden rounded-xl" style={{ height: 280 }}>
+      <div className="absolute inset-0 bg-black/20 rounded-xl" />
+      {CODE_TOKENS.map((tok, i) => {
+        const left = 5 + ((i * 17) % 88);
+        const delay = (i * 0.4) % 6;
+        const dur = 5 + (i % 4);
+        return (
+          <motion.span
+            key={i}
+            className="absolute font-mono text-[11px] text-gold/60 select-none whitespace-nowrap"
+            style={{ left: `${left}%`, bottom: -24 }}
+            animate={{ y: [-0, -320], opacity: [0, 0.8, 0.8, 0] }}
+            transition={{ duration: dur, repeat: Infinity, delay, ease: "linear" }}
+          >
+            {tok}
+          </motion.span>
+        );
+      })}
+      {/* scan line */}
+      <motion.div
+        className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent"
+        animate={{ top: ["0%", "100%"] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+      />
+    </div>
+  );
+}
+
+// 03 Apply — particle burst
+function ApplyVisual() {
+  const particles = Array.from({ length: 20 });
+  return (
+    <div className="relative w-full flex items-center justify-center rounded-xl" style={{ height: 280 }}>
+      <div className="relative flex items-center justify-center" style={{ width: 260, height: 260 }}>
+        {/* pulsing rings */}
+        {[80, 110, 140].map((r, ri) => (
+          <motion.div key={ri}
+            className="absolute rounded-full border border-gold/20"
+            style={{ width: r * 2, height: r * 2 }}
+            animate={{ scale: [1, 1.08, 1], opacity: [0.3, 0.15, 0.3] }}
+            transition={{ duration: 2.4 + ri * 0.6, repeat: Infinity, delay: ri * 0.5 }}
+          />
+        ))}
+        {/* center node */}
+        <div className="relative z-10 size-14 rounded-2xl glass-gold grid place-items-center glow-gold">
+          <Wrench className="size-6 text-gold" />
+        </div>
+        {/* orbiting particles */}
+        {particles.map((_, i) => {
+          const angle = (i / particles.length) * 360;
+          const r = 90 + (i % 3) * 25;
+          const dur = 8 + (i % 5);
+          return (
+            <motion.div key={i}
+              className="absolute"
+              style={{ width: r * 2, height: r * 2 }}
+              animate={{ rotate: i % 2 === 0 ? 360 : -360 }}
+              transition={{ duration: dur, repeat: Infinity, ease: "linear" }}
+            >
+              <motion.div
+                className="absolute rounded-full bg-gold"
+                style={{
+                  width: 3 + (i % 3),
+                  height: 3 + (i % 3),
+                  top: "0%",
+                  left: "50%",
+                  transform: "translate(-50%,-50%)",
+                  opacity: 0.3 + (i % 4) * 0.15,
+                }}
+                animate={{ opacity: [0.2, 0.9, 0.2] }}
+                transition={{ duration: 1.5 + (i % 3), repeat: Infinity, delay: i * 0.15 }}
+              />
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// 04 Succeed — expanding trophy rings
+function SucceedVisual() {
+  return (
+    <div className="relative w-full flex items-center justify-center rounded-xl" style={{ height: 280 }}>
+      <div className="relative flex items-center justify-center">
+        {[40, 70, 100, 130, 160].map((r, i) => (
+          <motion.div key={i}
+            className="absolute rounded-full border border-gold"
+            style={{ width: r * 2, height: r * 2 }}
+            animate={{ scale: [0.8, 1.3], opacity: [0.6, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.5, ease: "easeOut" }}
+          />
+        ))}
+        <motion.div
+          animate={{ scale: [1, 1.06, 1] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="relative z-10 size-20 rounded-2xl glass-gold grid place-items-center glow-gold"
+        >
+          <Trophy className="size-8 text-gold" />
+        </motion.div>
+      </div>
+    </div>
+  );
+}
 
 /* ─── Step interactive content ─── */
 
@@ -208,28 +373,28 @@ const steps = [
     headline: "Build Foundational Understanding",
     body: "Structured, adaptive programs that build foundational understanding — at each learner's pace, with AI support in every lesson. No one gets left behind. No one clicks through.",
     Icon: BookOpen,
-    Content: LearnContent,
+    Visual: LearnVisual,
   },
   {
     n: "02", tag: "Step 02 — Practice",
     headline: "Write Real Code. Analyze Real Data.",
     body: "Hands-on Jupyter Labs where learners write real code, analyze real data, and build real projects — with the AI Tutor guiding every step. This is the step other platforms skip.",
     Icon: Code2,
-    Content: PracticeContent,
+    Visual: PracticeVisual,
   },
   {
     n: "03", tag: "Step 03 — Apply",
     headline: "Passive Knowledge Becomes Active Capability",
     body: "Real-world projects that mirror actual job tasks. This is the step that traditional platforms skip entirely. This is where passive knowledge becomes active capability.",
     Icon: Wrench,
-    Content: ApplyContent,
+    Visual: ApplyVisual,
   },
   {
     n: "04", tag: "Step 04 — Succeed",
     headline: "Certifications Backed by Demonstrated Competency",
     body: "Career matches in the Jobs Portal, and analytics reports that prove program ROI to administrators, executives, and accreditation bodies.",
     Icon: Trophy,
-    Content: SucceedContent,
+    Visual: SucceedVisual,
   },
 ];
 
@@ -372,7 +537,7 @@ export function Journey() {
                       </div>
                     </div>
 
-                    {/* Interactive content — only rendered when active */}
+                    {/* Visual fill — only rendered when active */}
                     <AnimatePresence>
                       {isActive && (
                         <motion.div
@@ -380,10 +545,10 @@ export function Journey() {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 8 }}
                           transition={{ duration: 0.4, delay: 0.1 }}
-                          className="flex-1"
+                          className="flex-1 mt-4"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          <s.Content />
+                          <s.Visual />
                         </motion.div>
                       )}
                     </AnimatePresence>

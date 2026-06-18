@@ -50,17 +50,30 @@ export function Careers() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="mt-6 space-y-3 text-sm text-muted-foreground"
+              className="mt-6 space-y-3"
             >
               {[
-                "For universities: Prove placement rates to accreditation bodies and prospective students.",
-                "For companies: Identify internal candidates for promotion based on demonstrated competency, not tenure.",
-                "For learners: Stop applying blind — apply to roles where your skills already match the requirement.",
-              ].map((t) => (
-                <li key={t} className="flex items-start gap-3">
-                  <ArrowRight className="size-4 text-gold mt-0.5 shrink-0" />
-                  <span>{t}</span>
-                </li>
+                { label: "For universities", detail: "Prove placement rates to accreditation bodies and prospective students." },
+                { label: "For companies", detail: "Identify internal candidates for promotion based on demonstrated competency, not tenure." },
+                { label: "For learners", detail: "Stop applying blind — apply to roles where your skills already match the requirement." },
+              ].map((item, i) => (
+                <motion.li
+                  key={i}
+                  initial={{ opacity: 0, x: -12 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 + i * 0.1 }}
+                  className="relative rounded-2xl glass-gold p-4 overflow-hidden"
+                >
+                  <div className="absolute -top-6 -right-6 size-20 rounded-full bg-gold/10 blur-xl pointer-events-none" />
+                  <div className="relative flex items-start gap-3">
+                    <ArrowRight className="size-4 text-gold mt-0.5 shrink-0" />
+                    <div>
+                      <span className="font-display font-bold text-gold">{item.label}:</span>{" "}
+                      <span className="text-sm text-foreground/80">{item.detail}</span>
+                    </div>
+                  </div>
+                </motion.li>
               ))}
             </motion.ul>
             <motion.a

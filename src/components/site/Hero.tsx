@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
-import { Play, ArrowRight } from "lucide-react";
+import { Play } from "lucide-react";
 
 function NeuralNet() {
   // animated SVG neural network with floating particles
@@ -188,55 +188,57 @@ export function Hero() {
         <div className="mt-8 grid lg:grid-cols-[1.05fr_1fr] gap-10 lg:gap-14 items-center">
           <div>
             <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.02] tracking-tight">
-              {"The Platform Where ".split(" ").map((w, i) => (
-                <motion.span
-                  key={i}
-                  className="inline-block mr-3"
-                  initial={{ y: 30, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.15 + i * 0.06, duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
-                >
-                  {w}
-                </motion.span>
-              ))}
               <motion.span
+                className="block"
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.7 }}
-                className="inline-block text-gold text-glow-gold"
+                transition={{ delay: 0.15, duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
+              >
+                AI-Powered learning
+              </motion.span>
+              <motion.span
+                className="block"
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.28, duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
+              >
+                management
+              </motion.span>
+              <motion.span
+                className="block"
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.41, duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
+              >
+                software for{" "}
+                <span className="text-gold text-glow-gold">Modern</span>
+              </motion.span>
+              <motion.span
+                className="block text-gold text-glow-gold"
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.54, duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
               >
                 Learning
-              </motion.span>{" "}
-              <motion.span
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.62, duration: 0.7 }}
-                className="inline-block"
-              >
-                Becomes
-              </motion.span>{" "}
-              <motion.span
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.74, duration: 0.7 }}
-                className="inline-block text-gold text-glow-gold"
-              >
-                Capability.
               </motion.span>
             </h1>
 
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, duration: 0.6 }}
-              className="mt-6 max-w-xl text-base sm:text-lg text-muted-foreground"
+              className="mt-6 max-w-xl space-y-4 text-base sm:text-lg text-muted-foreground"
             >
-              Upskilled is AI-powered learning management software that combines AI tutors,
-              integrated coding labs, automated assessments, career pathways, and learning
-              intelligence to build real-world skills — and prove real-world outcomes.
-              As a modern learning management system, Upskilled helps institutions and
-              organizations move beyond static training content and build measurable capability.
-            </motion.p>
+              <p>
+                Upskilled is AI-powered <strong className="text-foreground font-semibold">learning management software</strong> that
+                combines AI tutors, integrated coding labs, automated assessments, career pathways,
+                and learning intelligence to build real-world skills — and prove real-world outcomes.
+              </p>
+              <p className="font-semibold text-foreground">
+                As a modern learning management system, Upskilled helps institutions and
+                organizations move beyond static training content and build measurable capability.
+              </p>
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -248,8 +250,7 @@ export function Hero() {
                 href="#cta"
                 className="group relative inline-flex items-center gap-2 rounded-full bg-gold text-black font-semibold px-6 py-3 text-sm hover:scale-[1.03] active:scale-95 transition-transform glow-gold overflow-hidden"
               >
-                <span className="relative z-10">Start Free Trial</span>
-                <ArrowRight className="size-4 relative z-10 transition-transform group-hover:translate-x-1" />
+                <span className="relative z-10">Start Free Trial →</span>
                 <span className="absolute inset-0 shine" />
               </a>
               <a
@@ -259,7 +260,7 @@ export function Hero() {
                 <span className="grid place-items-center size-6 rounded-full border border-gold text-gold">
                   <Play className="size-3 fill-current" />
                 </span>
-                Book a Demo
+                ▶ Book a Demo
               </a>
             </motion.div>
 
@@ -267,17 +268,12 @@ export function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2 }}
-              className="mt-10 grid grid-cols-3 gap-4 max-w-md"
+              className="mt-10 flex flex-wrap gap-2"
             >
-              {[
-                { k: "80%", v: "Less grading time" },
-                { k: "3×", v: "Faster time-to-skill" },
-                { k: "5 min", v: "Doubt resolution" },
-              ].map((s) => (
-                <div key={s.k} className="rounded-xl glass p-3">
-                  <div className="font-display text-xl font-bold text-gold">{s.k}</div>
-                  <div className="text-[11px] text-muted-foreground mt-0.5">{s.v}</div>
-                </div>
+              {["AI-Powered Learning", "Integrated Jupyter Labs", "Automated Assessments", "Career Pathways", "Learning Intelligence", "SOC 2 · HIPAA · ISO 27001"].map((tag) => (
+                <span key={tag} className="text-[11px] font-mono glass rounded-full px-3 py-1 text-muted-foreground">
+                  {tag}
+                </span>
               ))}
             </motion.div>
           </div>

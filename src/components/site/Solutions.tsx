@@ -12,20 +12,42 @@ const trainingTypes = [
   { Icon: FlaskConical, title: "Data Science Labs", body: "Live Jupyter notebooks, in-notebook AI tutor, auto-graded code review — scale to thousands without scaling your manual effort." },
 ];
 
+const highlights = [
+  { stat: "50 → 50,000", label: "Scales to any organization size — without changing platforms" },
+  { stat: "1 platform", label: "Education, corporate, compliance, and technical training — all in one" },
+  { stat: "Zero lock-in", label: "Open-source Frappe framework — self-hostable, auditable, yours" },
+];
+
 export function Solutions() {
   return (
     <section className="relative py-28">
       <div className="mx-auto max-w-7xl px-4">
-        <div className="max-w-3xl">
+        <div className="max-w-4xl">
           <div className="text-xs tracking-[0.25em] text-gold font-mono">SOLUTIONS</div>
-          <h2 className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold">
+          <h2 className="mt-3 text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.02]">
             Built for every organization that{" "}
             <span className="text-gold text-glow-gold">can't afford to fall behind.</span>
           </h2>
-          <p className="mt-5 text-muted-foreground">
-            50 learners or 50,000 — Upskilled scales to every organization.
-          </p>
         </div>
+
+        {/* Highlighted 3 points */}
+        <div className="mt-10 grid sm:grid-cols-3 gap-4">
+          {highlights.map((h, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.6 }}
+              className="relative rounded-2xl glass-gold p-6 overflow-hidden group"
+            >
+              <div className="absolute -top-8 -right-8 size-32 rounded-full bg-gold/10 blur-2xl" />
+              <div className="font-display text-3xl font-bold text-gold text-glow-gold">{h.stat}</div>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{h.label}</p>
+            </motion.div>
+          ))}
+        </div>
+
         <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {trainingTypes.map((t, i) => {
             const TI = t.Icon;

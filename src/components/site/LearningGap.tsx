@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-const competitors = ["Moodle", "Canvas", "Blackboard", "TalentLMS", "Docebo", "Cornerstone", "LinkedIn Learning", "Coursera for Business"];
-
 const differentiators = [
   {
     n: "01",
@@ -61,21 +59,6 @@ export function LearningGap() {
             </p>
           </motion.div>
         </div>
-
-        {/* Competitor strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="mt-10 flex flex-wrap gap-2"
-        >
-          {competitors.map((c) => (
-            <span key={c} className="text-xs glass rounded-full px-3 py-1.5 text-muted-foreground line-through decoration-white/20">
-              {c}
-            </span>
-          ))}
-        </motion.div>
 
         {/* Four differentiators */}
         <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">

@@ -261,19 +261,6 @@ export function Hero() {
                 Book a Demo
               </a>
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.2 }}
-              className="mt-10 flex flex-wrap gap-2"
-            >
-              {["AI-Powered Learning", "Integrated Jupyter Labs", "Automated Assessments", "Career Pathways", "Learning Intelligence", "SOC 2 · HIPAA · ISO 27001"].map((tag) => (
-                <span key={tag} className="text-[11px] font-mono glass rounded-full px-3 py-1 text-muted-foreground">
-                  {tag}
-                </span>
-              ))}
-            </motion.div>
           </div>
 
           {/* Neural network visual */}

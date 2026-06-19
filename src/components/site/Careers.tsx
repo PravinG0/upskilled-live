@@ -12,7 +12,7 @@ export function Careers() {
   return (
     <section id="careers" className="relative py-28">
       <div className="mx-auto max-w-7xl px-4">
-        <div className="grid lg:grid-cols-[1fr_1.1fr] gap-12 items-start">
+        <div className="grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center">
           {/* Left: copy */}
           <div>
             <motion.div

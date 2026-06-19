@@ -23,7 +23,7 @@ export function JupyterLabs() {
       <div className="mx-auto max-w-7xl px-4 grid lg:grid-cols-2 gap-12 items-center">
         <div>
           <div className="text-xs tracking-[0.25em] text-gold font-mono">BUILT-IN JUPYTER LABS</div>
-          <h2 className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold">
+          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold">
             Stop Switching Between <br />
             <span className="text-gold text-glow-gold">Learning and Doing.</span>
           </h2>

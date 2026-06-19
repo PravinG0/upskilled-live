@@ -16,7 +16,7 @@ export function CTA() {
           <div className="absolute -top-20 left-1/2 -translate-x-1/2 size-[28rem] rounded-full bg-gold/20 blur-3xl" />
           <div className="relative">
             <div className="text-xs tracking-[0.25em] text-gold font-mono">THE COST OF WAITING</div>
-            <h2 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05]">
+          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.05]">
               Build skills. Prove growth. <br />
               <span className="text-gold text-glow-gold">Or watch someone else do it faster.</span>
             </h2>

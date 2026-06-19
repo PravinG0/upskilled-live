@@ -35,7 +35,7 @@ export function LearningGap() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, delay: 0.05 }}
-            className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05]"
+            className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.05]"
           >
             Every other platform delivers content.{" "}
             <span className="text-gold text-glow-gold">Upskilled builds capability.</span>
@@ -72,7 +72,7 @@ export function LearningGap() {
               className="relative rounded-2xl glass p-6 overflow-hidden group hover:bg-white/[0.04] transition"
             >
               <div className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent opacity-0 group-hover:opacity-100 transition" />
-              <div className="font-display text-4xl font-bold text-white/8">{d.n}</div>
+              <div className="font-display text-4xl font-bold text-gold/30">{d.n}</div>
               <h3 className="mt-3 font-display text-lg font-semibold">{d.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{d.body}</p>
             </motion.div>

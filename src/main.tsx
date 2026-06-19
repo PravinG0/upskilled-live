@@ -22,18 +22,31 @@ function App() {
     <main className="relative min-h-screen overflow-x-clip">
       <Nav />
       <Hero />
+      <div className="border-t border-white/5" />
       <TrustMarquee />
+      <div className="border-t border-white/5" />
       <WhoItIsFor />
+      <div className="border-t border-white/5" />
       <LearningGap />
+      <div className="border-t border-white/5" />
       <Journey />
+      <div className="border-t border-white/5" />
       <JupyterLabs />
+      <div className="border-t border-white/5" />
       <AIFeatures />
+      <div className="border-t border-white/5" />
       <Impact />
+      <div className="border-t border-white/5" />
       <Solutions />
+      <div className="border-t border-white/5" />
       <Careers />
+      <div className="border-t border-white/5" />
       <Security />
+      <div className="border-t border-white/5" />
       <FAQ />
+      <div className="border-t border-white/5" />
       <CTA />
+      <div className="border-t border-white/5" />
       <Footer />
     </main>
   );

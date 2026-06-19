@@ -431,7 +431,7 @@ export function Journey() {
               transition={{ duration: 0.7 }}
             >
               <div className="text-xs tracking-[0.25em] text-gold font-mono">THE LEARNING JOURNEY</div>
-              <h2 className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05]">
+              <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.05]">
                 Four steps from learning to{" "}
                 <span className="text-gold text-glow-gold">proven, employable capability.</span>
               </h2>

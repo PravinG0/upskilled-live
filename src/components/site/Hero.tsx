@@ -1,6 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
-import { Play } from "lucide-react";
 
 function NeuralNet() {
   // animated SVG neural network with floating particles
@@ -187,7 +186,7 @@ export function Hero() {
 
         <div className="mt-8 grid lg:grid-cols-[1.05fr_1fr] gap-10 lg:gap-14 items-center">
           <div>
-            <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.02] tracking-tight">
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight">
               <motion.span
                 className="block"
                 initial={{ y: 30, opacity: 0 }}
@@ -257,10 +256,7 @@ export function Hero() {
                 href="#cta"
                 className="inline-flex items-center gap-2 rounded-full glass px-5 py-3 text-sm text-foreground hover:bg-white/5 transition-colors"
               >
-                <span className="grid place-items-center size-6 rounded-full border border-gold text-gold">
-                  <Play className="size-3 fill-current" />
-                </span>
-                ▶ Book a Demo
+                Book a Demo
               </a>
             </motion.div>
 

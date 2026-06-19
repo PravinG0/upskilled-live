@@ -29,7 +29,7 @@ export function Careers() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.05 }}
-              className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05]"
+              className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.05]"
             >
               Universities prove graduate employability.{" "}
               <span className="text-gold text-glow-gold">Learners find careers that match what they can actually do.</span>

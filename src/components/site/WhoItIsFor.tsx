@@ -87,7 +87,7 @@ export function WhoItIsFor() {
         {/* ── Header ── */}
         <div className="max-w-3xl mb-14">
           <div className="text-xs tracking-[0.25em] text-gold font-mono">WHO THIS IS FOR</div>
-          <h2 className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05]">
+          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.05]">
             The stakes are different in every sector.{" "}
             <span className="text-gold text-glow-gold">The cost of the wrong LMS is not.</span>
           </h2>
@@ -156,7 +156,7 @@ export function WhoItIsFor() {
               <div className="relative rounded-3xl glass overflow-hidden p-8">
                 <div className="absolute inset-0 grid-bg opacity-20" />
                 <div className="relative">
-                  <div className="text-xs font-mono text-gold tracking-widest mb-4">{s.emoji} THE PROBLEM</div>
+                  <div className="text-xs font-mono text-gold tracking-widest mb-4">THE PROBLEM</div>
                   <blockquote className="text-xl sm:text-2xl font-bold leading-snug mb-5">
                     "{s.tagline}"
                   </blockquote>

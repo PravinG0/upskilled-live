@@ -18,7 +18,7 @@ export function Solutions() {
       <div className="mx-auto max-w-7xl px-4">
         <div className="max-w-4xl">
           <div className="text-xs tracking-[0.25em] text-gold font-mono">SOLUTIONS</div>
-          <h2 className="mt-3 text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.02]">
+          <h2 className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.02]">
             Built for every organization that{" "}
             <span className="text-gold text-glow-gold">can't afford to fall behind.</span>
           </h2>

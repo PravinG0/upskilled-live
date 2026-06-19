@@ -22,7 +22,7 @@ export function Security() {
       <div className="mx-auto max-w-7xl px-4">
         <div className="max-w-3xl">
           <div className="text-xs tracking-[0.25em] text-gold font-mono">SECURITY & COMPLIANCE</div>
-          <h2 className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold">
+          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold">
             Built for the institutions{" "}
             <span className="text-gold text-glow-gold">regulators actually audit.</span>
           </h2>

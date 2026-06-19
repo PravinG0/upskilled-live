@@ -134,7 +134,7 @@ export function AIFeatures() {
       <div className="mx-auto max-w-7xl px-4">
         <div className="max-w-3xl">
           <div className="text-xs tracking-[0.25em] text-gold font-mono">AI-POWERED TOOLS</div>
-          <h2 className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold">
+          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold">
             Six AI Capabilities. All Native.{" "}
             <span className="text-gold text-glow-gold">All Included.</span>
           </h2>

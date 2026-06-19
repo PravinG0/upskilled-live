@@ -1,5 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { MessageCircle } from "lucide-react";
 
 function NeuralNet() {
   // animated SVG neural network with floating particles
@@ -256,6 +257,7 @@ export function Hero() {
                 href="#cta"
                 className="inline-flex items-center gap-2 rounded-full glass px-5 py-3 text-sm text-foreground hover:bg-white/5 transition-colors"
               >
+                <MessageCircle className="size-4 text-gold" />
                 Book a Demo
               </a>
             </motion.div>

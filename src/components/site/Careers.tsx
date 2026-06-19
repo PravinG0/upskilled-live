@@ -32,6 +32,7 @@ export function Careers() {
               className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.05]"
             >
               Universities prove graduate employability.{" "}
+              <br />
               <span className="text-gold text-glow-gold">Learners find careers that match what they can actually do.</span>
             </motion.h2>
             <motion.p

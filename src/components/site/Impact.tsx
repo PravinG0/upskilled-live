@@ -42,6 +42,7 @@ export function Impact() {
           <div className="text-xs tracking-[0.25em] text-gold font-mono">THE NUMBERS THAT MATTER</div>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold">
             Measured Outcomes.{" "}
+            <br />
             <span className="text-gold text-glow-gold">Not Measured Completions.</span>
           </h2>
           <p className="mt-5 text-muted-foreground">

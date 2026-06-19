@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { BookOpen, Code2, Rocket, Trophy } from "lucide-react";
+import { BookOpen, Code2, FolderKanban, Trophy } from "lucide-react";
 
 /* ─── Ambient visual fills ─── */
 
@@ -107,7 +107,7 @@ function ApplyVisual() {
         ))}
         {/* center node */}
         <div className="relative z-10 size-14 rounded-2xl glass-gold grid place-items-center glow-gold">
-          <Rocket className="size-6 text-gold" />
+          <FolderKanban className="size-6 text-gold" />
         </div>
         {/* orbiting particles */}
         {particles.map((_, i) => {
@@ -386,7 +386,7 @@ const steps = [
     n: "03", tag: "Step 03 — Apply",
     headline: "Passive Knowledge Becomes Active Capability",
     body: "Real-world projects that mirror actual job tasks. This is the step that traditional platforms skip entirely. This is where passive knowledge becomes active capability.",
-    Icon: Rocket,
+    Icon: FolderKanban,
     Visual: ApplyVisual,
   },
   {

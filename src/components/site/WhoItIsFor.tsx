@@ -55,7 +55,6 @@ const sectors = [
       { need: "AI personalization at scale", theirs: "Static learning paths", ours: "Adaptive AI Tutor in every lesson" },
       { need: "Compliance records & audit trails", theirs: "Manual reporting", ours: "Auto-generated audit logs + outcome evidence" },
       { need: "Measurable skills growth", theirs: "Completion percentages", ours: "Skill growth analytics + AI intelligence dashboard" },
-      { need: "No vendor lock-in", theirs: "Proprietary, locked", ours: "Frappe framework — open source, self-hostable" },
     ],
     Icon: Building2,
   },
@@ -93,8 +92,8 @@ export function WhoItIsFor() {
           </h2>
         </div>
 
-        {/* ── Sector selector cards ── */}
-        <div className="grid sm:grid-cols-2 gap-4 max-w-xl mb-16">
+        {/* ── Sector selector tabs ── */}
+        <div className="flex gap-3 mb-16">
           {sectors.map((sec, i) => {
             const SI = sec.Icon;
             const isActive = active === i;
@@ -102,40 +101,22 @@ export function WhoItIsFor() {
               <motion.button
                 key={sec.id}
                 onClick={() => setActive(i)}
-                whileHover={{ y: -3 }}
+                whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className={`relative text-left rounded-2xl p-5 border transition-all duration-400 overflow-hidden ${
+                className={`relative flex items-center gap-3 rounded-full px-5 py-3 border font-medium text-sm transition-all duration-300 cursor-pointer select-none ${
                   isActive
-                    ? "glass-gold border-gold/50 shadow-[0_0_40px_-8px_rgba(255,208,0,0.4)]"
-                    : "glass border-white/8 hover:border-white/20"
+                    ? "bg-gold text-black border-gold shadow-[0_0_24px_-4px_rgba(255,208,0,0.6)] glow-gold"
+                    : "glass border-white/15 text-muted-foreground hover:border-white/30 hover:text-foreground"
                 }`}
               >
+                <SI className={`size-4 shrink-0 ${isActive ? "text-black" : "text-gold"}`} />
+                <span>{sec.label}</span>
                 {isActive && (
-                  <motion.div
-                    layoutId="sectorGlow"
-                    className="absolute inset-0 bg-gradient-to-br from-gold/10 to-transparent pointer-events-none"
+                  <motion.span
+                    layoutId="tabIndicator"
+                    className="absolute inset-0 rounded-full"
                   />
                 )}
-                <div className="relative flex items-center gap-3">
-                  <div className={`grid place-items-center size-10 rounded-xl transition-all ${isActive ? "bg-gold text-black" : "glass text-muted-foreground"}`}>
-                    <SI className="size-5" />
-                  </div>
-                  <div>
-                    <div className={`text-[10px] font-mono tracking-widest ${isActive ? "text-gold" : "text-muted-foreground"}`}>
-                      {i === 0 ? "EDUCATION" : "CORPORATE"}
-                    </div>
-                    <div className={`font-display font-semibold text-sm ${isActive ? "text-foreground" : "text-foreground/60"}`}>
-                      {sec.label}
-                    </div>
-                  </div>
-                  {isActive && (
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      className="ml-auto size-2 rounded-full bg-gold"
-                    />
-                  )}
-                </div>
               </motion.button>
             );
           })}

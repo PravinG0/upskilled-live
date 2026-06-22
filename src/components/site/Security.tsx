@@ -47,11 +47,14 @@ export function Security() {
           >
             <div className="absolute inset-0 grid-bg opacity-30 rounded-3xl" />
 
-            {/* orbit + shield wrapper */}
-            <div className="relative flex items-center justify-center" style={{ width: 320, height: 320 }}>
+            {/* orbit + shield wrapper — extra padding so badges don't clip */}
+            <div className="relative flex items-center justify-center" style={{ width: 360, height: 360 }}>
 
-              {/* dashed orbit ring */}
-              <div className="absolute inset-0 rounded-full border border-dashed border-white/20" />
+              {/* dashed orbit ring — sits centered in the 360px wrapper */}
+              <div
+                className="absolute rounded-full border border-dashed border-white/20"
+                style={{ width: 300, height: 300 }}
+              />
 
               {/* shield SVG — centered */}
               <svg viewBox="0 0 300 320" className="w-36 h-auto relative z-10">
@@ -92,18 +95,19 @@ export function Security() {
                 return (
                   <motion.div
                     key={t}
-                    className="absolute inset-0 flex items-start justify-center"
-                    style={{ rotate: deg }}
+                    className="absolute flex items-center justify-center"
+                    style={{ width: 300, height: 300, rotate: deg }}
                     animate={{ rotate: [deg, deg + 360] }}
                     transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
                   >
-                    {/* push badge to the ring edge — half of 320px = 160px, badge sits at top=0 */}
+                    {/* badge sits at top edge of the 300px ring */}
                     <motion.div
-                      style={{ marginTop: 0, rotate: -deg }}
-                      animate={{ rotate: [- deg, -(deg + 360)] }}
+                      className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                      style={{ rotate: -deg }}
+                      animate={{ rotate: [-deg, -(deg + 360)] }}
                       transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
                     >
-                      <div className="rounded-full glass-gold px-3 py-1 text-[10px] font-mono text-gold whitespace-nowrap -translate-y-1/2">
+                      <div className="rounded-full glass-gold px-3 py-1 text-[10px] font-mono text-gold whitespace-nowrap">
                         {t}
                       </div>
                     </motion.div>

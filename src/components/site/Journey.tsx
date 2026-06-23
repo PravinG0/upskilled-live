@@ -186,19 +186,29 @@ export function Journey() {
   const [activeIndex, setActiveIndex] = useState(0);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Use IntersectionObserver with a center-of-screen rootMargin
+  // Scroll-based sequential step — never skips, advances one at a time
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-    cardRefs.current.forEach((el, i) => {
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveIndex(i); },
-        { rootMargin: "-40% 0px -40% 0px", threshold: 0 }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-    return () => observers.forEach((o) => o.disconnect());
+    const handleScroll = () => {
+      const viewportMid = window.innerHeight / 2;
+
+      // Find which card's top is closest to the viewport center from above
+      let best = 0;
+      cardRefs.current.forEach((el, i) => {
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const cardMid = rect.top + rect.height / 2;
+        // Card is considered "active" when its center crosses the middle of the screen
+        if (cardMid <= viewportMid + 80) {
+          best = i;
+        }
+      });
+
+      setActiveIndex(best);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // run on mount
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -257,7 +267,7 @@ export function Journey() {
                       opacity: isActive ? 1 : 0.45,
                       scale: isActive ? 1 : 0.98,
                     }}
-                    transition={{ duration: 0.4 }}
+                    transition={{ duration: 0.6 }}
                     className={`relative rounded-2xl overflow-hidden cursor-pointer transition-colors duration-400 ${
                       isActive
                         ? "glass-gold shadow-[0_0_50px_-10px_rgba(255,208,0,0.35)]"

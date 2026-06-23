@@ -69,9 +69,11 @@ export function LearningGap() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.6, delay: i * 0.08 }}
-              className="relative rounded-2xl glass p-6 overflow-hidden group hover:bg-white/[0.04] transition"
+              className="relative rounded-2xl p-6 overflow-hidden group cursor-pointer transition-all duration-300 border border-white/8"
+              style={{ background: "rgba(255,255,255,0.04)" }}
+              whileHover={{ y: -4, x: 4, boxShadow: "-8px 8px 0 rgba(255,208,0,0.25)" }}
+              transition={{ duration: 0.15 }}
             >
-              <div className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent opacity-0 group-hover:opacity-100 transition" />
               <div className="font-display text-4xl font-bold text-gold/30">{d.n}</div>
               <h3 className="mt-3 font-display text-lg font-semibold">{d.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{d.body}</p>

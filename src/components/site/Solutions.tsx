@@ -45,9 +45,9 @@ export function Solutions() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.6, delay: (i % 4) * 0.06 }}
-                whileHover={{ y: -4, x: 4, boxShadow: "-8px 8px 0 rgba(255,208,0,0.25)" }}
+                whileHover={{ y: -4, x: 4, boxShadow: "-12px 12px 0 rgba(255,208,0,0.35)" }}
                 transition={{ duration: 0.15 }}
-                className="group relative rounded-2xl p-6 overflow-hidden cursor-pointer border border-white/8 transition-all duration-300"
+                className="group relative rounded-2xl p-6 overflow-hidden cursor-pointer border-2 border-white/8 hover:border-gold/40 transition-all duration-300"
                 style={{ background: "rgba(255,255,255,0.04)" }}
               >
                 <div className="grid place-items-center size-11 rounded-xl glass-gold text-gold">

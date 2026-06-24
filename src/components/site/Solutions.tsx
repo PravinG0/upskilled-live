@@ -41,17 +41,23 @@ export function Solutions() {
             return (
               <motion.div
                 key={t.title}
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: (i % 4) * 0.06 } },
-                  hover: { y: -4, x: 4, boxShadow: "-12px 12px 0 rgba(255,208,0,0.35)", transition: { duration: 0.12, type: "tween" } },
-                }}
-                initial="hidden"
-                whileInView="visible"
-                whileHover="hover"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
-                className="group relative rounded-2xl p-6 overflow-hidden cursor-pointer border-2 border-white/8 hover:border-gold/40 transition-colors duration-200"
-                style={{ background: "rgba(255,255,255,0.04)" }}
+                transition={{ duration: 0.6, delay: (i % 4) * 0.06 }}
+                className="group relative rounded-2xl p-6 overflow-hidden cursor-pointer border-2 border-white/8 hover:border-gold/40"
+                style={{
+                  background: "rgba(255,255,255,0.04)",
+                  transition: "transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease",
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLElement).style.transform = "translate(4px, -4px)";
+                  (e.currentTarget as HTMLElement).style.boxShadow = "-12px 12px 0 rgba(255,208,0,0.35)";
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLElement).style.transform = "";
+                  (e.currentTarget as HTMLElement).style.boxShadow = "";
+                }}
               >
                 <div className="grid place-items-center size-11 rounded-xl glass-gold text-gold">
                   <TI className="size-5" />

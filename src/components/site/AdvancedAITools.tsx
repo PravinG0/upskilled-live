@@ -434,8 +434,6 @@ export function AdvancedAITools() {
         })}
       </div>
 
-      {/* Bottom spacing */}
-      <div className="relative h-screen bg-background" style={{ zIndex: 10 + features.length }} />
     </section>
   );
 }

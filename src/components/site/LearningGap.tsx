@@ -72,7 +72,6 @@ export function LearningGap() {
               className="relative rounded-2xl p-6 overflow-hidden group cursor-pointer transition-all duration-300 border-2 border-white/8 hover:border-gold/40"
               style={{ background: "rgba(255,255,255,0.04)" }}
               whileHover={{ y: -4, x: 4, boxShadow: "-12px 12px 0 rgba(255,208,0,0.35)" }}
-              transition={{ duration: 0.15 }}
             >
               <div className="font-display text-4xl font-bold text-gold/30">{d.n}</div>
               <h3 className="mt-3 font-display text-lg font-semibold">{d.title}</h3>

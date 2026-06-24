@@ -65,13 +65,17 @@ export function LearningGap() {
           {differentiators.map((d, i) => (
             <motion.div
               key={d.n}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: i * 0.08 } },
+                hover: { y: -4, x: 4, boxShadow: "-12px 12px 0 rgba(255,208,0,0.35)", transition: { duration: 0.12, type: "tween" } },
+              }}
+              initial="hidden"
+              whileInView="visible"
+              whileHover="hover"
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.6, delay: i * 0.08 }}
-              className="relative rounded-2xl p-6 overflow-hidden group cursor-pointer transition-all duration-300 border-2 border-white/8 hover:border-gold/40"
+              className="relative rounded-2xl p-6 overflow-hidden group cursor-pointer transition-colors duration-200 border-2 border-white/8 hover:border-gold/40"
               style={{ background: "rgba(255,255,255,0.04)" }}
-              whileHover={{ y: -4, x: 4, boxShadow: "-12px 12px 0 rgba(255,208,0,0.35)" }}
             >
               <div className="font-display text-4xl font-bold text-gold/30">{d.n}</div>
               <h3 className="mt-3 font-display text-lg font-semibold">{d.title}</h3>

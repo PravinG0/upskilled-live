@@ -7,7 +7,7 @@ import { WhoItIsFor } from "@/components/site/WhoItIsFor";
 import { LearningGap } from "@/components/site/LearningGap";
 import { Journey } from "@/components/site/Journey";
 import { JupyterLabs } from "@/components/site/JupyterLabs";
-import { AIFeatures } from "@/components/site/AIFeatures";
+import { AdvancedAITools } from "@/components/site/AdvancedAITools";
 import { Impact } from "@/components/site/Impact";
 import { Solutions } from "@/components/site/Solutions";
 import { Careers } from "@/components/site/Careers";
@@ -33,7 +33,7 @@ function App() {
       <div className="border-t border-white/5" />
       <JupyterLabs />
       <div className="border-t border-white/5" />
-      <AIFeatures />
+      <AdvancedAITools />
       <div className="border-t border-white/5" />
       <Impact />
       <div className="border-t border-white/5" />

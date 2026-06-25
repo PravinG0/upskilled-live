@@ -340,7 +340,7 @@ export function AdvancedAITools() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60" />
         <div className="relative z-10 flex h-full flex-col justify-between px-6 py-16 md:px-12 lg:px-20">
           <div className="pt-16 md:pt-24 lg:pt-32">
-            <h1 className="max-w-5xl font-bold text-5xl leading-[1.05] tracking-tight text-white md:text-7xl lg:text-8xl">
+            <h1 className="max-w-5xl font-bold text-3xl leading-[1.05] tracking-tight text-white sm:text-4xl lg:text-5xl">
               AI Features
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/80 md:text-xl">
@@ -409,7 +409,7 @@ export function AdvancedAITools() {
                 <div className="grid w-full max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-20">
                   {/* Text content */}
                   <div className={`space-y-6 ${isTextLeft ? "lg:order-1 lg:pr-8" : "lg:order-2 lg:pl-8"}`}>
-                    <h2 className="text-4xl font-bold leading-[1.1] tracking-tight text-white md:text-5xl lg:text-6xl">
+                    <h2 className="text-3xl font-bold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-5xl">
                       {feature.title} <span className="italic text-gold">{feature.tagline}</span>
                     </h2>
                     <p className="max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">

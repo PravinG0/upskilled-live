@@ -230,13 +230,10 @@ export function Hero() {
               className="mt-6 max-w-xl space-y-4 text-base sm:text-lg text-muted-foreground"
             >
               <p>
-                Upskilled is AI-powered <strong className="text-foreground font-semibold">learning management software</strong> that
-                combines AI tutors, integrated coding labs, automated assessments, career pathways,
-                and learning intelligence to build real-world skills — and prove real-world outcomes.
-              </p>
-              <p className="font-semibold text-foreground">
-                As a modern learning management system, Upskilled helps institutions and
-                organizations move beyond static training content and build measurable capability.
+                Upskilled is an AI-powered <strong className="text-foreground font-semibold">Learning Management System</strong> for
+                educational institutions and enterprises, combining AI tutors, integrated coding labs,
+                automated assessments, career pathways, and learning intelligence to build real-world
+                skills with measurable impact.
               </p>
             </motion.div>
 

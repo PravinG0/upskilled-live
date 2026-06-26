@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { BookOpen, Code2, FolderKanban, Trophy } from "lucide-react";
 
@@ -185,30 +185,69 @@ const steps = [
 export function Journey() {
   const [activeIndex, setActiveIndex] = useState(0);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const activeIndexRef = useRef(0);
+  const rafRef = useRef<number | null>(null);
 
-  // Scroll-based sequential step — never skips, advances one at a time
+  // Fixed nav height: py-2 (scrolled) + inner py-3 + logo row ≈ 64px. Add 24px gap = 88px.
+  // Use 80px as a safe cross-state value (nav shrinks when scrolled).
+  const NAV_H = 80;
+
+  // Scroll a card into view below the fixed nav using explicit scrollTo math —
+  // avoids scrollIntoView + scrollMarginTop cross-browser inconsistencies.
+  const scrollToCard = (i: number) => {
+    const el = cardRefs.current[i];
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY - NAV_H - 24;
+    window.scrollTo({ top, behavior: "smooth" });
+  };
+
   useEffect(() => {
-    const handleScroll = () => {
-      const viewportMid = window.innerHeight / 2;
+    const onScroll = () => {
+      if (rafRef.current !== null) return;
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = null;
 
-      // Find which card's top is closest to the viewport center from above
-      let best = 0;
-      cardRefs.current.forEach((el, i) => {
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        const cardMid = rect.top + rect.height / 2;
-        // Card is considered "active" when its center crosses the middle of the screen
-        if (cardMid <= viewportMid - 40) {
-          best = i;
+        // A card becomes active when its top edge has cleared the nav and is in
+        // the upper half of the visible viewport. We track the card whose top is
+        // closest to (and still above) the midpoint of the visible area below the nav.
+        const visibleTop = NAV_H;           // top of visible area (below fixed nav)
+        const visibleMid = NAV_H + (window.innerHeight - NAV_H) / 2;
+
+        let best = 0;
+        cardRefs.current.forEach((el, i) => {
+          if (!el) return;
+          const rect = el.getBoundingClientRect();
+          // Card top has entered the visible area and is above the visible midpoint
+          if (rect.top >= visibleTop && rect.top <= visibleMid) {
+            best = i;
+          } else if (rect.top < visibleTop) {
+            // Card has scrolled above the visible area — treat it as a candidate
+            // only if nothing better (inside visible area) has been found yet
+            best = Math.max(best, i);
+          }
+        });
+
+        // Re-derive: pick the last card whose top is above visibleMid
+        let derived = 0;
+        cardRefs.current.forEach((el, i) => {
+          if (!el) return;
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= visibleMid) derived = i;
+        });
+
+        if (derived !== activeIndexRef.current) {
+          activeIndexRef.current = derived;
+          setActiveIndex(derived);
         }
       });
-
-      setActiveIndex(best);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // run on mount
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
   return (
@@ -217,7 +256,7 @@ export function Journey() {
         <div className="grid lg:grid-cols-[1fr_1.15fr] gap-16 items-start">
 
           {/* ── LEFT: sticky static text ── */}
-          <div className="lg:sticky lg:top-32">
+          <div className="lg:sticky lg:top-28">
             <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.7 }}>
               <div className="text-xs tracking-[0.25em] text-gold font-mono">THE LEARNING JOURNEY</div>
@@ -235,8 +274,13 @@ export function Journey() {
                 {steps.map((_, i) => (
                   <motion.button key={i}
                     onClick={() => {
+                      if (rafRef.current !== null) {
+                        cancelAnimationFrame(rafRef.current);
+                        rafRef.current = null;
+                      }
+                      activeIndexRef.current = i;
                       setActiveIndex(i);
-                      cardRefs.current[i]?.scrollIntoView({ behavior: "smooth", block: "center" });
+                      scrollToCard(i);
                     }}
                     animate={{ width: i === activeIndex ? 28 : 8, opacity: i === activeIndex ? 1 : 0.3 }}
                     transition={{ duration: 0.3 }}
@@ -250,7 +294,7 @@ export function Journey() {
             </motion.div>
           </div>
 
-          {/* ── RIGHT: scrolling cards — active is large+bright, inactive are compact+dim ── */}
+          {/* ── RIGHT: scrolling cards ── */}
           <div className="space-y-8">
             {steps.map((s, i) => {
               const SI = s.Icon;
@@ -258,17 +302,22 @@ export function Journey() {
               return (
                 <div key={s.n} ref={(el) => { cardRefs.current[i] = el; }}>
                   <motion.div
-                    layout
                     onClick={() => {
+                      if (rafRef.current !== null) {
+                        cancelAnimationFrame(rafRef.current);
+                        rafRef.current = null;
+                      }
+                      activeIndexRef.current = i;
                       setActiveIndex(i);
-                      cardRefs.current[i]?.scrollIntoView({ behavior: "smooth", block: "center" });
+                      scrollToCard(i);
                     }}
                     animate={{
                       opacity: isActive ? 1 : 0.45,
                       scale: isActive ? 1 : 0.98,
                     }}
-                    transition={{ duration: 0.6 }}
-                    className={`relative rounded-2xl overflow-hidden cursor-pointer transition-colors duration-400 ${
+                    transition={{ duration: 0.35, ease: "easeOut" }}
+                    style={{ willChange: "transform, opacity" }}
+                    className={`relative rounded-2xl overflow-hidden cursor-pointer transition-colors duration-300 ${
                       isActive
                         ? "glass-gold shadow-[0_0_50px_-10px_rgba(255,208,0,0.35)]"
                         : "glass"
@@ -280,7 +329,6 @@ export function Journey() {
 
                     {/* Card header — always visible */}
                     <div className="relative p-6 flex items-start gap-4">
-                      {/* Number */}
                       <div className={`shrink-0 grid place-items-center rounded-xl border-2 font-display font-bold text-xl transition-all duration-300 ${
                         isActive ? "border-gold text-gold bg-gold/10" : "border-white/15 text-white/25"
                       }`} style={{ width: 48, height: 48 }}>
@@ -298,14 +346,17 @@ export function Journey() {
                         }`}>
                           {s.headline}
                         </h3>
-                        <motion.p
-                          animate={{ opacity: isActive ? 1 : 0, height: isActive ? "auto" : 0 }}
-                          transition={{ duration: 0.35 }}
+                        <p
                           className="text-sm text-muted-foreground leading-relaxed overflow-hidden"
-                          style={{ marginTop: isActive ? 8 : 0 }}
+                          style={{
+                            maxHeight: isActive ? 120 : 0,
+                            opacity: isActive ? 1 : 0,
+                            marginTop: isActive ? 8 : 0,
+                            transition: "max-height 0.35s ease, opacity 0.3s ease, margin-top 0.3s ease",
+                          }}
                         >
                           {s.body}
-                        </motion.p>
+                        </p>
                       </div>
 
                       <div className={`shrink-0 grid place-items-center size-9 rounded-xl transition-all duration-300 ${
@@ -315,23 +366,20 @@ export function Journey() {
                       </div>
                     </div>
 
-                    {/* Visual — only when active, fixed height so card doesn't grow infinitely */}
-                    <AnimatePresence>
-                      {isActive && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 240 }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.4 }}
-                          className="overflow-hidden px-6 pb-6"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <div className="w-full h-full rounded-xl overflow-hidden" style={{ height: 210 }}>
-                            <s.Visual />
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                    <div
+                      className="overflow-hidden px-6"
+                      style={{
+                        maxHeight: isActive ? 280 : 0,
+                        opacity: isActive ? 1 : 0,
+                        paddingBottom: isActive ? 24 : 0,
+                        transition: "max-height 0.4s ease, opacity 0.35s ease, padding-bottom 0.35s ease",
+                      }}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <div className="w-full rounded-xl overflow-hidden" style={{ height: 210 }}>
+                        <s.Visual />
+                      </div>
+                    </div>
                   </motion.div>
                 </div>
               );

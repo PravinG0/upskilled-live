@@ -55,7 +55,7 @@ function NeuralNet() {
         );
       })}
       {/* pulse signals along edges */}
-      {edges.slice(0, 18).map(([i, j], k) => {
+      {edges.map(([i, j], k) => {
         const a = nodes[i], b = nodes[j];
         return (
           <motion.circle

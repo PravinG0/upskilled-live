@@ -14,8 +14,26 @@ const codeLines = [
 export function JupyterLabs() {
   const [shown, setShown] = useState(0);
   useEffect(() => {
-    const id = setInterval(() => setShown((v) => (v >= codeLines.length ? 1 : v + 1)), 900);
-    return () => clearInterval(id);
+    let current = 0;
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    function showNext() {
+      current += 1;
+      if (current <= codeLines.length) {
+        setShown(current);
+        timeoutId = setTimeout(showNext, 1800);
+      } else {
+        // All lines shown — wait 3 seconds then restart
+        timeoutId = setTimeout(() => {
+          current = 0;
+          setShown(0);
+          timeoutId = setTimeout(showNext, 400);
+        }, 3000);
+      }
+    }
+
+    timeoutId = setTimeout(showNext, 800);
+    return () => clearTimeout(timeoutId);
   }, []);
 
   return (

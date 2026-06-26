@@ -198,7 +198,7 @@ export function Journey() {
         const rect = el.getBoundingClientRect();
         const cardMid = rect.top + rect.height / 2;
         // Card is considered "active" when its center crosses the middle of the screen
-        if (cardMid <= viewportMid + 80) {
+        if (cardMid <= viewportMid - 40) {
           best = i;
         }
       });
@@ -251,7 +251,7 @@ export function Journey() {
           </div>
 
           {/* ── RIGHT: scrolling cards — active is large+bright, inactive are compact+dim ── */}
-          <div className="space-y-4">
+          <div className="space-y-8">
             {steps.map((s, i) => {
               const SI = s.Icon;
               const isActive = activeIndex === i;

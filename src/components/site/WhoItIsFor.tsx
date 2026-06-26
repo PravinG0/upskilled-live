@@ -188,9 +188,9 @@ export function WhoItIsFor() {
             <div className="rounded-3xl glass overflow-hidden border border-white/8">
               {/* Header */}
               <div className="grid grid-cols-[1.5fr_1fr_1.3fr] border-b border-white/8">
-                <div className="px-6 py-4 text-[10px] font-mono tracking-widest text-muted-foreground">WHAT'S NEEDED</div>
-                <div className="px-6 py-4 text-[10px] font-mono tracking-widest text-muted-foreground border-l border-white/8">MOST PLATFORMS</div>
-                <div className="px-6 py-4 text-[10px] font-mono tracking-widest text-gold bg-gold/5 border-l border-gold/20">UPSKILLED</div>
+                <div className="px-6 py-5 text-xs font-mono tracking-widest font-bold text-white uppercase">WHAT'S NEEDED</div>
+                <div className="px-6 py-5 text-xs font-mono tracking-widest font-bold text-white uppercase border-l border-white/8">MOST PLATFORMS</div>
+                <div className="px-6 py-5 text-xs font-mono tracking-widest font-bold text-gold bg-gold/5 border-l border-gold/20 uppercase">UPSKILLED</div>
               </div>
 
               {s.comparison.map((row, i) => (

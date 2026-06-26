@@ -25,7 +25,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-16">
         <div className="grid lg:grid-cols-[1.4fr_3fr] gap-10">
           <div>
-            <Logo className="text-2xl" />
+            <Logo height={44} />
             <p className="mt-4 text-sm text-muted-foreground max-w-sm">
               AI-powered learning management software that builds real-world skills and proves
               real-world outcomes. Built on open-source Frappe framework.

@@ -35,7 +35,7 @@ export function Nav() {
             scrolled ? "glass shadow-[0_8px_40px_-12px_rgba(0,0,0,0.6)]" : ""
           }`}
         >
-          <Logo className="text-xl sm:text-2xl" />
+          <Logo />
           <nav className="hidden md:flex items-center gap-7 text-sm text-muted-foreground">
             {links.map((l) => (
               <a

@@ -1,18 +1,28 @@
 import { motion } from "framer-motion";
+import logoWhite from "@/assets/Upskilledai_Horizontal _white.svg";
 
-export function Logo({ className = "" }: { className?: string }) {
+interface LogoProps {
+  className?: string;
+  /** Height in px — defaults to 36 for nav, pass 44 for footer */
+  height?: number;
+}
+
+export function Logo({ className = "", height = 36 }: LogoProps) {
   return (
     <motion.a
       href="#top"
-      className={`group inline-flex items-baseline gap-0 font-display font-bold tracking-tight ${className}`}
+      className={`inline-flex items-center ${className}`}
       initial={{ opacity: 0, y: -6 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
-      aria-label="Upskilled AI"
+      aria-label="Upskilled AI — Home"
     >
-      <span className="text-gold text-glow-gold lowercase">upskilled</span>
-      <span className="text-foreground lowercase">.ai</span>
-      <span className="ml-1 inline-block size-1.5 rounded-full bg-gold shadow-[0_0_12px_var(--gold)] floaty" />
+      <img
+        src={logoWhite}
+        alt="Upskilled AI"
+        style={{ height: `${height}px`, width: "auto", maxWidth: "none", display: "block" }}
+        draggable={false}
+      />
     </motion.a>
   );
 }

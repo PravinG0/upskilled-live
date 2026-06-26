@@ -184,21 +184,17 @@ const steps = [
 
 export function Journey() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const activeIndexRef = useRef(0);
   const rafRef = useRef<number | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-  // Fixed nav height: py-2 (scrolled) + inner py-3 + logo row ≈ 64px. Add 24px gap = 88px.
-  // Use 80px as a safe cross-state value (nav shrinks when scrolled).
-  const NAV_H = 80;
-
-  // Scroll a card into view below the fixed nav using explicit scrollTo math —
-  // avoids scrollIntoView + scrollMarginTop cross-browser inconsistencies.
-  const scrollToCard = (i: number) => {
-    const el = cardRefs.current[i];
-    if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY - NAV_H - 24;
-    window.scrollTo({ top, behavior: "smooth" });
+  const scrollToStep = (i: number) => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+    const scrollBudget = section.offsetHeight - window.innerHeight;
+    const target = sectionTop + (i / steps.length) * scrollBudget;
+    window.scrollTo({ top: target, behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -206,42 +202,19 @@ export function Journey() {
       if (rafRef.current !== null) return;
       rafRef.current = requestAnimationFrame(() => {
         rafRef.current = null;
-
-        // A card becomes active when its top edge has cleared the nav and is in
-        // the upper half of the visible viewport. We track the card whose top is
-        // closest to (and still above) the midpoint of the visible area below the nav.
-        const visibleTop = NAV_H;           // top of visible area (below fixed nav)
-        const visibleMid = NAV_H + (window.innerHeight - NAV_H) / 2;
-
-        let best = 0;
-        cardRefs.current.forEach((el, i) => {
-          if (!el) return;
-          const rect = el.getBoundingClientRect();
-          // Card top has entered the visible area and is above the visible midpoint
-          if (rect.top >= visibleTop && rect.top <= visibleMid) {
-            best = i;
-          } else if (rect.top < visibleTop) {
-            // Card has scrolled above the visible area — treat it as a candidate
-            // only if nothing better (inside visible area) has been found yet
-            best = Math.max(best, i);
-          }
-        });
-
-        // Re-derive: pick the last card whose top is above visibleMid
-        let derived = 0;
-        cardRefs.current.forEach((el, i) => {
-          if (!el) return;
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= visibleMid) derived = i;
-        });
-
+        const section = sectionRef.current;
+        if (!section) return;
+        const rect = section.getBoundingClientRect();
+        const scrollBudget = section.offsetHeight - window.innerHeight;
+        if (scrollBudget <= 0) return;
+        const progress = Math.max(0, Math.min(1, -rect.top / scrollBudget));
+        const derived = Math.min(steps.length - 1, Math.floor(progress * steps.length));
         if (derived !== activeIndexRef.current) {
           activeIndexRef.current = derived;
           setActiveIndex(derived);
         }
       });
     };
-
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => {
@@ -251,141 +224,146 @@ export function Journey() {
   }, []);
 
   return (
-    <section className="relative py-28">
-      <div className="mx-auto max-w-7xl px-4">
-        <div className="grid lg:grid-cols-[1fr_1.15fr] gap-16 items-start">
+    <section
+      ref={sectionRef}
+      className="relative"
+      style={{ height: `${(steps.length + 1) * 100}vh` }}
+    >
+      <div className="sticky top-0 h-screen overflow-hidden flex items-start pt-24 pb-10">
+        <div className="mx-auto w-full max-w-7xl px-4 h-full">
+          <div className="grid lg:grid-cols-[1fr_1.15fr] gap-16 h-full">
 
-          {/* ── LEFT: sticky static text ── */}
-          <div className="lg:sticky lg:top-28">
-            <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }} transition={{ duration: 0.7 }}>
-              <div className="text-xs tracking-[0.25em] text-gold font-mono">THE LEARNING JOURNEY</div>
-              <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.05]">
-                Four steps from learning to{" "}
-                <span className="text-gold text-glow-gold">proven, employable capability.</span>
-              </h2>
-              <p className="mt-5 text-muted-foreground max-w-md leading-relaxed">
-                Real learning doesn't happen when someone watches a video. It happens when they
-                practice, experiment, fail, improve — and eventually master a skill.
-              </p>
+            {/* ── LEFT: text panel ── */}
+            <div className="flex flex-col justify-start pt-4">
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+              >
+                <div className="text-xs tracking-[0.25em] text-gold font-mono">THE LEARNING JOURNEY</div>
+                <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.05]">
+                  Four steps from learning to{" "}
+                  <span className="text-gold text-glow-gold">proven, employable capability.</span>
+                </h2>
+                <p className="mt-5 text-muted-foreground max-w-md leading-relaxed">
+                  Real learning doesn't happen when someone watches a video. It happens when they
+                  practice, experiment, fail, improve — and eventually master a skill.
+                </p>
+                <div className="mt-10 flex items-center gap-2.5">
+                  {steps.map((_, i) => (
+                    <motion.button
+                      key={i}
+                      onClick={() => scrollToStep(i)}
+                      animate={{ width: i === activeIndex ? 28 : 8, opacity: i === activeIndex ? 1 : 0.3 }}
+                      transition={{ duration: 0.3 }}
+                      className="h-1.5 rounded-full bg-gold cursor-pointer"
+                    />
+                  ))}
+                  <span className="ml-2 font-mono text-xs text-muted-foreground">
+                    {String(activeIndex + 1).padStart(2, "0")} / 04
+                  </span>
+                </div>
+              </motion.div>
+            </div>
 
-              {/* Step dots */}
-              <div className="mt-10 flex items-center gap-2.5">
-                {steps.map((_, i) => (
-                  <motion.button key={i}
-                    onClick={() => {
-                      if (rafRef.current !== null) {
-                        cancelAnimationFrame(rafRef.current);
-                        rafRef.current = null;
-                      }
-                      activeIndexRef.current = i;
-                      setActiveIndex(i);
-                      scrollToCard(i);
-                    }}
-                    animate={{ width: i === activeIndex ? 28 : 8, opacity: i === activeIndex ? 1 : 0.3 }}
-                    transition={{ duration: 0.3 }}
-                    className="h-1.5 rounded-full bg-gold cursor-pointer"
-                  />
-                ))}
-                <span className="ml-2 font-mono text-xs text-muted-foreground">
-                  {String(activeIndex + 1).padStart(2, "0")} / 04
-                </span>
-              </div>
-            </motion.div>
-          </div>
+            {/* ── RIGHT: single card slot — cards slide in from bottom, exit upward ── */}
+            <div className="relative flex flex-col justify-start pt-4 overflow-hidden">
+              {steps.map((s, i) => {
+                const SI = s.Icon;
+                const isActive = activeIndex === i;
+                const isPast = i < activeIndex;
+                const isFuture = i > activeIndex;
 
-          {/* ── RIGHT: scrolling cards ── */}
-          <div className="space-y-8">
-            {steps.map((s, i) => {
-              const SI = s.Icon;
-              const isActive = activeIndex === i;
-              return (
-                <div key={s.n} ref={(el) => { cardRefs.current[i] = el; }}>
+                const translateY = isPast ? "-110%" : isFuture ? "110%" : "0%";
+                const opacity = isActive ? 1 : 0;
+
+                return (
                   <motion.div
-                    onClick={() => {
-                      if (rafRef.current !== null) {
-                        cancelAnimationFrame(rafRef.current);
-                        rafRef.current = null;
-                      }
-                      activeIndexRef.current = i;
-                      setActiveIndex(i);
-                      scrollToCard(i);
+                    key={s.n}
+                    onClick={() => scrollToStep(i)}
+                    animate={{ y: translateY, opacity }}
+                    transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      willChange: "transform, opacity",
                     }}
-                    animate={{
-                      opacity: isActive ? 1 : 0.45,
-                      scale: isActive ? 1 : 0.98,
-                    }}
-                    transition={{ duration: 0.35, ease: "easeOut" }}
-                    style={{ willChange: "transform, opacity" }}
-                    className={`relative rounded-2xl overflow-hidden cursor-pointer transition-colors duration-300 ${
-                      isActive
-                        ? "glass-gold shadow-[0_0_50px_-10px_rgba(255,208,0,0.35)]"
-                        : "glass"
-                    }`}
                   >
+                    {/*
+                      Glow halo positioned top-right, clipped so it only bleeds
+                      outward — not inward through the card corners.
+                      border-top-right-radius matches the card's rounded-2xl (1rem)
+                      so the glow respects the corner shape.
+                    */}
                     {isActive && (
-                      <div className="absolute -top-20 -right-20 size-72 rounded-full bg-gold/8 blur-3xl pointer-events-none" />
+                      <div
+                        className="absolute pointer-events-none"
+                        style={{
+                          zIndex: 0,
+                          top: -24,
+                          right: -24,
+                          width: 180,
+                          height: 180,
+                          borderRadius: "50%",
+                          background: "radial-gradient(circle, rgba(255,208,0,0.18) 0%, transparent 70%)",
+                          filter: "blur(24px)",
+                        }}
+                      />
                     )}
 
-                    {/* Card header — always visible */}
-                    <div className="relative p-6 flex items-start gap-4">
-                      <div className={`shrink-0 grid place-items-center rounded-xl border-2 font-display font-bold text-xl transition-all duration-300 ${
-                        isActive ? "border-gold text-gold bg-gold/10" : "border-white/15 text-white/25"
-                      }`} style={{ width: 48, height: 48 }}>
-                        {i + 1}
-                      </div>
-
-                      <div className="flex-1 min-w-0">
-                        <div className={`text-[10px] font-mono tracking-widest mb-1 transition-colors ${
-                          isActive ? "text-gold" : "text-muted-foreground/50"
-                        }`}>
-                          {s.tag.toUpperCase()}
-                        </div>
-                        <h3 className={`font-display font-bold text-lg leading-snug transition-colors ${
-                          isActive ? "text-foreground" : "text-foreground/40"
-                        }`}>
-                          {s.headline}
-                        </h3>
-                        <p
-                          className="text-sm text-muted-foreground leading-relaxed overflow-hidden"
-                          style={{
-                            maxHeight: isActive ? 120 : 0,
-                            opacity: isActive ? 1 : 0,
-                            marginTop: isActive ? 8 : 0,
-                            transition: "max-height 0.35s ease, opacity 0.3s ease, margin-top 0.3s ease",
-                          }}
-                        >
-                          {s.body}
-                        </p>
-                      </div>
-
-                      <div className={`shrink-0 grid place-items-center size-9 rounded-xl transition-all duration-300 ${
-                        isActive ? "bg-gold text-black" : "glass text-white/20"
-                      }`}>
-                        <SI className="size-4" />
-                      </div>
-                    </div>
-
                     <div
-                      className="overflow-hidden px-6"
-                      style={{
-                        maxHeight: isActive ? 280 : 0,
-                        opacity: isActive ? 1 : 0,
-                        paddingBottom: isActive ? 24 : 0,
-                        transition: "max-height 0.4s ease, opacity 0.35s ease, padding-bottom 0.35s ease",
-                      }}
-                      onClick={(e) => e.stopPropagation()}
+                      className={`relative rounded-2xl overflow-hidden cursor-pointer ${
+                        isActive
+                          ? "glass-gold shadow-[0_8px_32px_-8px_rgba(255,208,0,0.25),0_0_0_1px_rgba(255,208,0,0.2)]"
+                          : "glass"
+                      }`}
+                      style={{ zIndex: 1 }}
                     >
-                      <div className="w-full rounded-xl overflow-hidden" style={{ height: 210 }}>
-                        <s.Visual />
+                      {/* Card header */}
+                      <div className="relative p-5 flex items-start gap-4">
+                        <div
+                          className="shrink-0 grid place-items-center rounded-xl border-2 font-display font-bold text-xl border-gold text-gold bg-gold/10"
+                          style={{ width: 44, height: 44 }}
+                        >
+                          {i + 1}
+                        </div>
+
+                        <div className="flex-1 min-w-0">
+                          <div className="text-[10px] font-mono tracking-widest mb-1 text-gold">
+                            {s.tag.toUpperCase()}
+                          </div>
+                          <h3 className="font-display font-bold text-base leading-snug text-foreground">
+                            {s.headline}
+                          </h3>
+                          <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                            {s.body}
+                          </p>
+                        </div>
+
+                        <div className="shrink-0 grid place-items-center size-8 rounded-xl bg-gold text-black">
+                          <SI className="size-4" />
+                        </div>
+                      </div>
+
+                      {/* Visual panel */}
+                      <div
+                        className="px-5 pb-5"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <div className="w-full rounded-xl overflow-hidden" style={{ height: 200 }}>
+                          <s.Visual />
+                        </div>
                       </div>
                     </div>
                   </motion.div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
 
+          </div>
         </div>
       </div>
     </section>
